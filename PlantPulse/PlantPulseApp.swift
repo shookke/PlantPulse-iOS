@@ -9,12 +9,31 @@ import SwiftUI
 
 @main
 struct PlantPulseApp: App {
-    let persistenceController = PersistenceController.shared
-
+    @StateObject var profile = Profile()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(profile)
+                .onAppear {
+                    isTokenValid()
+                }
+        }
+    }
+    
+    func isTokenValid() {
+        let token = KeychainHelper.shared.getAuthToken()
+        let expiration = KeychainHelper.shared.getExpirationDate()
+        
+        if let token = token, let expiration = expiration {
+            if expiration > Date() {
+                profile.token = token
+                profile.isLoggedIn = true
+            } else {
+                profile.isLoggedIn = false
+            }
+        } else {
+            profile.isLoggedIn = false
         }
     }
 }
