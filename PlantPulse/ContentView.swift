@@ -11,11 +11,17 @@ struct ContentView: View {
     @EnvironmentObject var profile: Profile
     
     var body: some View {
-        
-        if profile.isLoggedIn {
-            MainView()
-        } else {
-            LoginView()
+        VStack {
+            if profile.isLoggedIn {
+                MainView()
+            } else {
+                LoginView()
+            }
+        }
+        .onAppear {
+            if let loadedUser = UserDefaultsHelper.loadUser() {
+                profile.user = loadedUser
+            }
         }
     }
 }

@@ -9,22 +9,19 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var profile: Profile
-    @StateObject var viewModel = HomeViewModel()
+    @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
-        VStack {
-            Text("Hello, \(profile.user.firstname)!")
-            List(profile.user.devices) { device in
-                VStack(alignment: .leading) {
-                    Text(device.plantType)
-                        .font(.headline)
+        NavigationStack {
+            List {
+                ForEach(viewModel.plants) { plant in
+                    Text(plant.plantType.name)
                 }
             }
-            .onAppear {
-                do {
-                    viewModel.fetchDevices(userId: profile.user.id)
-                }
+            .refreshable {
+                viewModel.loadData()
             }
+            .navigationTitle("My Plants")
         }
     }
 }

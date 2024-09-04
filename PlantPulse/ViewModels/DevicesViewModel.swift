@@ -1,18 +1,18 @@
 //
-//  HomeViewModel.swift
+//  DevicesViewModel.swift
 //  PlantPulse
 //
-//  Created by Kevin Shook on 8/24/24.
+//  Created by Kevin Shook on 8/31/24.
 //
 
 import Foundation
 import SwiftUI
 
-class HomeViewModel: ObservableObject {
+class DevicesViewModel: ObservableObject {
     @EnvironmentObject var profile: Profile
     
-    @Published var plants = [Plant]()
-    @Published var plantsLoadError: String? = ""
+    @Published var devices = [Device]()
+    @Published var deviceLoadError: String? = ""
     
     init() {
         loadData()
@@ -20,11 +20,11 @@ class HomeViewModel: ObservableObject {
     
 }
 
-extension HomeViewModel {
+extension DevicesViewModel {
     @MainActor
     func fetchDevices() async throws {
         do {
-            guard let url = URL(string: "\(NetworkConstants.baseURL)/plants/") else {
+            guard let url = URL(string: "\(NetworkConstants.baseURL)/devices/") else {
                 throw APIError.invalidURL
             }
             
@@ -36,12 +36,13 @@ extension HomeViewModel {
             
             let decoder = JSONDecoder()
             //decoder.dateDecodingStrategy = .iso8601 // Set the date decoding strategy
-            guard let data = try? decoder.decode(PlantsResponse.self, from: data) else { throw APIError.noData }
+            guard let data = try? decoder.decode(DevicesResponse.self, from: data) else { throw APIError.noData }
             
-            self.plants = data.plants
+            self.devices = data.devices
+            print(self.devices[0].plantType)
             
         } catch {
-            plantsLoadError = error.localizedDescription
+            deviceLoadError = error.localizedDescription
         }
     }
     
