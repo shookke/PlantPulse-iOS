@@ -32,7 +32,9 @@ struct LoginView: View {
                 }
                 
                 Button(action: {
-                    profile.login()
+                    Task() {
+                        try await profile.login()
+                    }
                 }) {
                     Text("Login")
                         .frame(minWidth: 0, maxWidth: .infinity)

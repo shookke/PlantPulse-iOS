@@ -17,21 +17,33 @@ class RegisterViewModel: ObservableObject {
     @Published var registrationError: String?
     @Published var isSuccess: Bool = false
     
-    func register() {
+}
+extension RegisterViewModel {
+    @MainActor
+    func register() async throws {
         if !isValid() {
             return
         }
-        APIService.shared.registerUser(firstname: self.firstname, lastname: self.lastname, email: self.email, password: self.password) { result in
-            DispatchQueue.main.async { [self] in
-                switch result {
-                    case .success(_):
-                        self.isSuccess = true
-                        self.registrationError = nil
-                    case .failure(let error):
-                        self.registrationError = error.localizedDescription
-                }
-            }
+        guard let url = URL(string: "\(NetworkConstants.baseURL)/users/register") else {
+            throw APIError.invalidURL
         }
+        
+        let registerData = [
+            "firstname": firstname,
+            "lastname": lastname,
+            "email": email,
+            "password": password
+        ]
+        
+        let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: registerData)
+        
+        // Create and run the URLSession
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        // Validate the response
+        guard (response as? HTTPURLResponse)?.statusCode == 201 else { throw APIError.serverError }
+        
+        guard let _ = try? JSONDecoder().decode(UserResponse.self, from: data) else {return}
     }
     
     func isValid() -> Bool {
@@ -81,8 +93,9 @@ class RegisterViewModel: ObservableObject {
         let specialCharacterPredicate = NSPredicate(format: "SELF MATCHES %@", specialCharacterPattern)
         
         return lowercasePredicate.evaluate(with: password) &&
-            uppercasePredicate.evaluate(with: password) &&
-            numberPredicate.evaluate(with: password) &&
-            specialCharacterPredicate.evaluate(with: password)
+        uppercasePredicate.evaluate(with: password) &&
+        numberPredicate.evaluate(with: password) &&
+        specialCharacterPredicate.evaluate(with: password)
     }
 }
+    

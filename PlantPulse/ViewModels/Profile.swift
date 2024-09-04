@@ -21,45 +21,59 @@ class Profile: ObservableObject {
             id: "",
             firstname: "",
             lastname: "",
-            email: "",
-            devices: []
+            email: ""
         );
     }
     
-    func login() {
+}
+extension Profile {
+    @MainActor
+    func login() async throws {
         if !isValid() {
             return
         }
-        APIService.shared.login(email: self.email, password: self.password) { result in
-            DispatchQueue.main.async { [self] in
-                switch result {
-                    
-                case .success(let response):
-                    
-                    let token = response.token
-                    let expiresIn = response.expiresIn
-                    
-                   do {
-                        // Parse the expiresIn astring and get the time interval in secons
-                        let expirationDate = try ExpirationHelper.parseExpiresIn(from: expiresIn)
-                        
-                        // Save token and expiration in Keychain
-                        KeychainHelper.shared.saveAuthToken(token, expiration: expirationDate)
-                        
-                    } catch {
-                        self.loginError = "Error saving token to keychain"
-                    }
-                    
-                    // Update UserViewModel with user data
-                    self.user = response.user
-                                            
-                    // Update login state
-                    self.isLoggedIn = true
-                    
-                case .failure(let error):
-                    self.loginError = error.localizedDescription
-                }
+        do {
+            guard let url = URL(string: "\(NetworkConstants.baseURL)/users/login") else {
+                throw APIError.invalidURL
             }
+            
+            let loginData: [String: Any] = [
+                "email": self.email,
+                "password": self.password,
+                "stayLoggedIn": true
+            ]
+            
+            let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: loginData)
+            
+            // Create and run the URLSession
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            // Validate the response
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw APIError.serverError }
+            
+            guard let data = try? JSONDecoder().decode(LoginResponse.self, from: data) else { throw APIError.noData }
+            
+            self.token = data.token
+            let expiresIn = data.expiresIn
+            self.user = data.user
+            
+            // Store User data in local storage
+            UserDefaultsHelper.saveUser(data.user)
+            
+            
+            var expiration = Date().addingTimeInterval(120)
+            do {
+                let date = try ExpirationHelper.parseExpiresIn(from: expiresIn)
+                expiration = date
+            } catch {
+                self.loginError = error.localizedDescription
+            }
+            KeychainHelper.shared.saveAuthToken(token, expiration: expiration)
+            
+            self.isLoggedIn = true
+            
+        } catch {
+            self.loginError = error.localizedDescription
         }
     }
     
@@ -83,7 +97,7 @@ class Profile: ObservableObject {
         return true
     }
     
-    private func checkForExistingToken() {
+    private func checkForExistingToken() async throws {
         let renewPeriod: Double = 30 * 24 * 60 * 60
         // Check if token exists in Keychain
         if let _ = KeychainHelper.shared.getAuthToken(),
@@ -92,7 +106,11 @@ class Profile: ObservableObject {
                 self.isLoggedIn = true
             } else if Date().addingTimeInterval(renewPeriod) >= expirationDate {
                 self.isLoggedIn = true
-                renewToken()
+                do {
+                    try await renewToken()
+                } catch {
+                    loginError = error.localizedDescription
+                }
             } else {
                 self.isLoggedIn = false
             }
@@ -101,21 +119,38 @@ class Profile: ObservableObject {
         }
     }
     
-    private func renewToken() {
+    private func renewToken() async throws {
         if self.isLoggedIn {
-            guard let token = KeychainHelper.shared.getAuthToken() else { return }
-            APIService.shared.renewToken(token: token) { result in
-                switch result {
-                case .success(let response):
-                    let token = response.token
-                    let expiresInString = response.expiresIn
-                    
-                    if let expirationDate = try? ExpirationHelper.parseExpiresIn(from: expiresInString){
-                        KeychainHelper.shared.saveAuthToken(token, expiration: expirationDate)
-                    }
-                case .failure(let error):
-                    print("Failure to renew token: \(error.localizedDescription)")
+            do {
+                guard let url = URL(string: "\(NetworkConstants.baseURL)/users/renewToken") else {
+                    throw APIError.invalidURL
                 }
+                
+                let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: nil)
+                
+                let (data, response) = try await URLSession.shared.data(for: request)
+                
+                guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw APIError.serverError }
+                
+                guard let data = try? JSONDecoder().decode(LoginResponse.self, from: data) else { throw APIError.noData }
+                            
+                self.token = data.token
+                let expiresIn = data.expiresIn
+                var expiration = Date().addingTimeInterval(120) // defaults to 1h
+                
+                do {
+                    let date = try ExpirationHelper.parseExpiresIn(from: expiresIn)
+                    expiration = date
+                } catch {
+                    self.loginError = error.localizedDescription
+                }
+                
+                self.user = data.user
+                KeychainHelper.shared.saveAuthToken(token, expiration: expiration)
+                
+                isLoggedIn = true
+            } catch {
+                self.loginError = error.localizedDescription
             }
         }
     }
@@ -134,13 +169,9 @@ class Profile: ObservableObject {
             id: "",
             firstname: "",
             lastname: "",
-            email: "",
-            devices: []
+            email: ""
         );
-    }
-    
-    private func addDevice(newDevice: Device) {
-        user.devices.append(newDevice)
+        UserDefaultsHelper.removeUser()
     }
     
     

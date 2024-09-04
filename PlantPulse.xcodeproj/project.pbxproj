@@ -12,13 +12,14 @@
 		787E7EC12C77E3C3006FCAE1 /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EC02C77E3C3006FCAE1 /* Reading.swift */; };
 		787E7EC32C780ACC006FCAE1 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EC22C780ACC006FCAE1 /* Profile.swift */; };
 		787E7EC52C7A2E0C006FCAE1 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EC42C7A2E0C006FCAE1 /* RegisterViewModel.swift */; };
-		787E7EC72C7A38A3006FCAE1 /* RegistrationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EC62C7A38A3006FCAE1 /* RegistrationResponse.swift */; };
 		787E7EC92C7A3956006FCAE1 /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EC82C7A3956006FCAE1 /* UserResponse.swift */; };
 		787E7ECB2C7A52DD006FCAE1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ECA2C7A52DD006FCAE1 /* HomeView.swift */; };
 		787E7ECD2C7A5358006FCAE1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ECC2C7A5358006FCAE1 /* ProfileView.swift */; };
 		787E7ECF2C7A536C006FCAE1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ECE2C7A536C006FCAE1 /* SettingsView.swift */; };
 		787E7ED12C7A8E3B006FCAE1 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ED02C7A8E3B006FCAE1 /* HomeViewModel.swift */; };
 		787E7ED52C7BC9F6006FCAE1 /* DevicesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ED42C7BC9F6006FCAE1 /* DevicesResponse.swift */; };
+		787E7ED72C7D3D1B006FCAE1 /* RegistrationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ED62C7D3D1B006FCAE1 /* RegistrationError.swift */; };
+		787E7ED92C7F6036006FCAE1 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7ED82C7F6036006FCAE1 /* UserDefaultsHelper.swift */; };
 		789384492C6F84F600A54C68 /* PlantPulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384482C6F84F600A54C68 /* PlantPulseApp.swift */; };
 		7893844B2C6F84F600A54C68 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893844A2C6F84F600A54C68 /* ContentView.swift */; };
 		7893844D2C6F84FE00A54C68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7893844C2C6F84FE00A54C68 /* Assets.xcassets */; };
@@ -28,12 +29,21 @@
 		7893846B2C6F84FE00A54C68 /* PlantPulseUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893846A2C6F84FE00A54C68 /* PlantPulseUITestsLaunchTests.swift */; };
 		7893847A2C75080A00A54C68 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384792C75080A00A54C68 /* LoginView.swift */; };
 		789384812C751E6500A54C68 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384802C751E6500A54C68 /* LoginResponse.swift */; };
-		789384852C75215B00A54C68 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384842C75215B00A54C68 /* APIService.swift */; };
+		789384852C75215B00A54C68 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384842C75215B00A54C68 /* APIHelper.swift */; };
 		789384872C7539C600A54C68 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384862C7539C600A54C68 /* KeychainHelper.swift */; };
 		789384892C753D9800A54C68 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789384882C753D9800A54C68 /* NetworkConstants.swift */; };
 		7893848B2C756F6000A54C68 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848A2C756F6000A54C68 /* RegisterView.swift */; };
 		7893848D2C75721000A54C68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848C2C75721000A54C68 /* MainView.swift */; };
 		7893848F2C764CBC00A54C68 /* ExpirationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */; };
+		78FB8A942C7FC30300F67193 /* ESPProvision in Frameworks */ = {isa = PBXBuildFile; productRef = 78FB8A932C7FC30300F67193 /* ESPProvision */; };
+		78FB8A962C82385C00F67193 /* DeviceRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */; };
+		78FB8A982C8255B900F67193 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A972C8255B900F67193 /* QRScannerView.swift */; };
+		78FB8A9A2C82571C00F67193 /* QRScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */; };
+		78FB8A9C2C82586300F67193 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9B2C82586300F67193 /* DevicesView.swift */; };
+		78FB8A9E2C83A98300F67193 /* DevicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */; };
+		78FB8AA02C83ABAE00F67193 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9F2C83ABAE00F67193 /* Plant.swift */; };
+		78FB8AA22C83AF3100F67193 /* PlantsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8AA12C83AF3100F67193 /* PlantsResponse.swift */; };
+		78FB8AA42C83B18B00F67193 /* DeviceRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8AA32C83B18B00F67193 /* DeviceRegistrationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,18 +64,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		783452F82C84F3C600E0FC95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		787E7EBC2C77E220006FCAE1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		787E7EBE2C77E2FE006FCAE1 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		787E7EC02C77E3C3006FCAE1 /* Reading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
 		787E7EC22C780ACC006FCAE1 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		787E7EC42C7A2E0C006FCAE1 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		787E7EC62C7A38A3006FCAE1 /* RegistrationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationResponse.swift; sourceTree = "<group>"; };
 		787E7EC82C7A3956006FCAE1 /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		787E7ECA2C7A52DD006FCAE1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		787E7ECC2C7A5358006FCAE1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		787E7ECE2C7A536C006FCAE1 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		787E7ED02C7A8E3B006FCAE1 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		787E7ED42C7BC9F6006FCAE1 /* DevicesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesResponse.swift; sourceTree = "<group>"; };
+		787E7ED62C7D3D1B006FCAE1 /* RegistrationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationError.swift; sourceTree = "<group>"; };
+		787E7ED82C7F6036006FCAE1 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsHelper.swift; path = PlantPulse/Utilities/UserDefaultsHelper.swift; sourceTree = SOURCE_ROOT; };
 		789384452C6F84F600A54C68 /* PlantPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlantPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789384482C6F84F600A54C68 /* PlantPulseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPulseApp.swift; sourceTree = "<group>"; };
 		7893844A2C6F84F600A54C68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -78,12 +90,20 @@
 		7893846A2C6F84FE00A54C68 /* PlantPulseUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantPulseUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		789384792C75080A00A54C68 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		789384802C751E6500A54C68 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
-		789384842C75215B00A54C68 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		789384842C75215B00A54C68 /* APIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
 		789384862C7539C600A54C68 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		789384882C753D9800A54C68 /* NetworkConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstants.swift; sourceTree = "<group>"; };
 		7893848A2C756F6000A54C68 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		7893848C2C75721000A54C68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationHelper.swift; sourceTree = "<group>"; };
+		78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationView.swift; sourceTree = "<group>"; };
+		78FB8A972C8255B900F67193 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
+		78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
+		78FB8A9B2C82586300F67193 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
+		78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewModel.swift; sourceTree = "<group>"; };
+		78FB8A9F2C83ABAE00F67193 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
+		78FB8AA12C83AF3100F67193 /* PlantsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantsResponse.swift; sourceTree = "<group>"; };
+		78FB8AA32C83B18B00F67193 /* DeviceRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78FB8A942C7FC30300F67193 /* ESPProvision in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +155,7 @@
 		789384472C6F84F600A54C68 /* PlantPulse */ = {
 			isa = PBXGroup;
 			children = (
+				783452F82C84F3C600E0FC95 /* Info.plist */,
 				7893847F2C751D1100A54C68 /* Utilities */,
 				7893847E2C751D0000A54C68 /* Services */,
 				7893847D2C751CF000A54C68 /* ViewModels */,
@@ -180,8 +202,10 @@
 				787E7EBE2C77E2FE006FCAE1 /* Device.swift */,
 				787E7EC02C77E3C3006FCAE1 /* Reading.swift */,
 				787E7EC82C7A3956006FCAE1 /* UserResponse.swift */,
-				787E7EC62C7A38A3006FCAE1 /* RegistrationResponse.swift */,
 				787E7ED42C7BC9F6006FCAE1 /* DevicesResponse.swift */,
+				787E7ED62C7D3D1B006FCAE1 /* RegistrationError.swift */,
+				78FB8A9F2C83ABAE00F67193 /* Plant.swift */,
+				78FB8AA12C83AF3100F67193 /* PlantsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -195,6 +219,9 @@
 				7893848C2C75721000A54C68 /* MainView.swift */,
 				787E7ECA2C7A52DD006FCAE1 /* HomeView.swift */,
 				787E7ECC2C7A5358006FCAE1 /* ProfileView.swift */,
+				78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */,
+				78FB8A972C8255B900F67193 /* QRScannerView.swift */,
+				78FB8A9B2C82586300F67193 /* DevicesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -205,6 +232,9 @@
 				787E7EC22C780ACC006FCAE1 /* Profile.swift */,
 				787E7EC42C7A2E0C006FCAE1 /* RegisterViewModel.swift */,
 				787E7ED02C7A8E3B006FCAE1 /* HomeViewModel.swift */,
+				78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */,
+				78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */,
+				78FB8AA32C83B18B00F67193 /* DeviceRegistrationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -212,8 +242,9 @@
 		7893847E2C751D0000A54C68 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				789384842C75215B00A54C68 /* APIService.swift */,
+				789384842C75215B00A54C68 /* APIHelper.swift */,
 				789384862C7539C600A54C68 /* KeychainHelper.swift */,
+				787E7ED82C7F6036006FCAE1 /* UserDefaultsHelper.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -243,6 +274,9 @@
 			dependencies = (
 			);
 			name = PlantPulse;
+			packageProductDependencies = (
+				78FB8A932C7FC30300F67193 /* ESPProvision */,
+			);
 			productName = PlantPulse;
 			productReference = 789384452C6F84F600A54C68 /* PlantPulse.app */;
 			productType = "com.apple.product-type.application";
@@ -315,6 +349,9 @@
 				Base,
 			);
 			mainGroup = 7893843C2C6F84F600A54C68;
+			packageReferences = (
+				78FB8A922C7FC30300F67193 /* XCRemoteSwiftPackageReference "esp-idf-provisioning-ios" */,
+			);
 			productRefGroup = 789384462C6F84F600A54C68 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -357,28 +394,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78FB8A9A2C82571C00F67193 /* QRScannerViewModel.swift in Sources */,
 				787E7ED52C7BC9F6006FCAE1 /* DevicesResponse.swift in Sources */,
 				787E7EBD2C77E220006FCAE1 /* User.swift in Sources */,
 				787E7EC52C7A2E0C006FCAE1 /* RegisterViewModel.swift in Sources */,
 				7893847A2C75080A00A54C68 /* LoginView.swift in Sources */,
+				78FB8A982C8255B900F67193 /* QRScannerView.swift in Sources */,
+				787E7ED72C7D3D1B006FCAE1 /* RegistrationError.swift in Sources */,
+				78FB8AA02C83ABAE00F67193 /* Plant.swift in Sources */,
 				7893848F2C764CBC00A54C68 /* ExpirationHelper.swift in Sources */,
 				789384892C753D9800A54C68 /* NetworkConstants.swift in Sources */,
 				787E7ECF2C7A536C006FCAE1 /* SettingsView.swift in Sources */,
 				7893844B2C6F84F600A54C68 /* ContentView.swift in Sources */,
 				787E7EBF2C77E2FE006FCAE1 /* Device.swift in Sources */,
+				787E7ED92C7F6036006FCAE1 /* UserDefaultsHelper.swift in Sources */,
 				787E7EC92C7A3956006FCAE1 /* UserResponse.swift in Sources */,
 				789384872C7539C600A54C68 /* KeychainHelper.swift in Sources */,
+				78FB8A9C2C82586300F67193 /* DevicesView.swift in Sources */,
 				787E7ECB2C7A52DD006FCAE1 /* HomeView.swift in Sources */,
+				78FB8AA42C83B18B00F67193 /* DeviceRegistrationViewModel.swift in Sources */,
+				78FB8AA22C83AF3100F67193 /* PlantsResponse.swift in Sources */,
 				789384492C6F84F600A54C68 /* PlantPulseApp.swift in Sources */,
 				787E7EC12C77E3C3006FCAE1 /* Reading.swift in Sources */,
 				787E7EC32C780ACC006FCAE1 /* Profile.swift in Sources */,
 				7893848B2C756F6000A54C68 /* RegisterView.swift in Sources */,
-				789384852C75215B00A54C68 /* APIService.swift in Sources */,
+				789384852C75215B00A54C68 /* APIHelper.swift in Sources */,
 				787E7ED12C7A8E3B006FCAE1 /* HomeViewModel.swift in Sources */,
 				7893848D2C75721000A54C68 /* MainView.swift in Sources */,
+				78FB8A9E2C83A98300F67193 /* DevicesViewModel.swift in Sources */,
+				78FB8A962C82385C00F67193 /* DeviceRegistrationView.swift in Sources */,
 				787E7ECD2C7A5358006FCAE1 /* ProfileView.swift in Sources */,
 				789384812C751E6500A54C68 /* LoginResponse.swift in Sources */,
-				787E7EC72C7A38A3006FCAE1 /* RegistrationResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,11 +585,16 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PlantPulse/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlantPulse/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PlantPulse;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to scan QR codes for device provisioning.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_OTHER_KEYS = "NSCameraUsageDescription = \"This app requires access to the camera to scan QR codes for device provisioning.\"";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -567,11 +618,16 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PlantPulse/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PlantPulse/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PlantPulse;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to scan QR codes for device provisioning.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_OTHER_KEYS = "NSCameraUsageDescription = \"This app requires access to the camera to scan QR codes for device provisioning.\"";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -697,6 +753,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		78FB8A922C7FC30300F67193 /* XCRemoteSwiftPackageReference "esp-idf-provisioning-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/espressif/esp-idf-provisioning-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		78FB8A932C7FC30300F67193 /* ESPProvision */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 78FB8A922C7FC30300F67193 /* XCRemoteSwiftPackageReference "esp-idf-provisioning-ios" */;
+			productName = ESPProvision;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7893843D2C6F84F600A54C68 /* Project object */;
 }

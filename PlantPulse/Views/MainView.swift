@@ -16,6 +16,10 @@ struct MainView: View {
                 .tabItem {
                     Image(systemName: "house.fill")
                 }
+            DevicesView()
+                .tabItem {
+                    Image(systemName: "point.3.filled.connected.trianglepath.dotted")
+                }
             ProfileView()
                 .tabItem {
                     Image(systemName: "person.fill")
@@ -35,3 +39,4 @@ struct UserHomeView_Previews: PreviewProvider {
             .environmentObject(Profile())
     }
 }
+

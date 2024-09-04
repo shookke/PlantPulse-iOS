@@ -42,7 +42,9 @@ struct RegisterView: View {
             }
             
             Button(action: {
-                viewModel.register()
+                Task() {
+                    try await viewModel.register()
+                }
             }) {
                 Text("Register")
                     .frame(minWidth: 0, maxWidth: .infinity)

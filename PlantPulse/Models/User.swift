@@ -12,7 +12,6 @@ struct User: Identifiable, Codable {
     let firstname: String
     let lastname: String
     let email: String
-    var devices: [Device] = []
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
