@@ -5,9 +5,11 @@
 //  Created by Kevin Shook on 8/30/24.
 //
 import SwiftUI
+import UIKit
 import ESPProvision
 
-struct QRCodeScannerView: UIViewControllerRepresentable {
+struct QRCodeScannerView<Page: View>: UIViewControllerRepresentable {
+    var page: Page
     
 // Callback to return the ESPDevice on success
     var onDeviceScanned: (ESPDevice) -> Void

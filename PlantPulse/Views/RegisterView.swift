@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RegisterView: View {
-    @StateObject private var viewModel = RegisterViewModel()
+    @StateObject private var viewModel = RegisterViewModel(password: "")
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         VStack {
@@ -31,6 +32,10 @@ struct RegisterView: View {
             SecureField("Password", text: $viewModel.password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+            
+            PasswordHelperView(viewModel: viewModel)
+                .padding(.vertical)
+            
             SecureField("Confirm Password", text: $viewModel.pwConfirm)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
@@ -43,7 +48,12 @@ struct RegisterView: View {
             
             Button(action: {
                 Task() {
-                    try await viewModel.register()
+                    do{
+                        try await viewModel.register()
+                        dismiss()
+                    } catch {
+                        print("Something happened in registration")
+                    }
                 }
             }) {
                 Text("Register")

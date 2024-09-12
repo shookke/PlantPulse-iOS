@@ -11,7 +11,7 @@ import SwiftUI
 class DevicesViewModel: ObservableObject {
     @EnvironmentObject var profile: Profile
     
-    @Published var devices = [Device]()
+    @Published var devices: [Device] = []
     @Published var deviceLoadError: String? = ""
     
     init() {
@@ -39,7 +39,6 @@ extension DevicesViewModel {
             guard let data = try? decoder.decode(DevicesResponse.self, from: data) else { throw APIError.noData }
             
             self.devices = data.devices
-            print(self.devices[0].plantType)
             
         } catch {
             deviceLoadError = error.localizedDescription

@@ -1,22 +1,23 @@
 //
-//  DeviceRegistrationViewModel.swift
+//  WiFiSetupViewModel.swift
 //  PlantPulse
 //
-//  Created by Kevin Shook on 8/31/24.
+//  Created by Kevin Shook on 9/9/24.
 //
 
-import Foundation
+import SwiftUI
 import ESPProvision
 
-class DeviceRegistrationViewModel: ObservableObject {
-    @Published var device: ESPDevice?
+class WiFiSetupViewModel: ObservableObject {
     @Published var wifiNetworks: [ESPWifiNetwork] = []
     @Published var connectionError: String?
     @Published var isConnected = false
     @Published var isConfigApplied = false
     
-    init() {
-        
+    private var device: ESPDevice?
+    
+    init(device: ESPDevice?) {
+        self.device = device
     }
     
     func fetchWifiNetworks() {
@@ -54,6 +55,5 @@ class DeviceRegistrationViewModel: ObservableObject {
     }
 }
 
-extension DeviceRegistrationView {
-    
-}
+
+

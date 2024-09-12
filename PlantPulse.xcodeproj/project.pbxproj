@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		787634D62C8F57DF00377091 /* PasswordHelperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D52C8F57DF00377091 /* PasswordHelperView.swift */; };
+		787634D82C8F996600377091 /* WiFiSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D72C8F996600377091 /* WiFiSetupView.swift */; };
+		787634DA2C8FA8E900377091 /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D92C8FA8E900377091 /* DeviceInfoView.swift */; };
+		787634DC2C8FD9CF00377091 /* WiFiSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634DB2C8FD9CF00377091 /* WiFiSetupViewModel.swift */; };
 		787E7EBD2C77E220006FCAE1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EBC2C77E220006FCAE1 /* User.swift */; };
 		787E7EBF2C77E2FE006FCAE1 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EBE2C77E2FE006FCAE1 /* Device.swift */; };
 		787E7EC12C77E3C3006FCAE1 /* Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787E7EC02C77E3C3006FCAE1 /* Reading.swift */; };
@@ -35,6 +39,8 @@
 		7893848B2C756F6000A54C68 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848A2C756F6000A54C68 /* RegisterView.swift */; };
 		7893848D2C75721000A54C68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848C2C75721000A54C68 /* MainView.swift */; };
 		7893848F2C764CBC00A54C68 /* ExpirationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */; };
+		78B461872C90A75600ECDB4A /* WiFiSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B461862C90A75600ECDB4A /* WiFiSignalView.swift */; };
+		78B461892C91068F00ECDB4A /* PlantIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B461882C91068F00ECDB4A /* PlantIdView.swift */; };
 		78FB8A942C7FC30300F67193 /* ESPProvision in Frameworks */ = {isa = PBXBuildFile; productRef = 78FB8A932C7FC30300F67193 /* ESPProvision */; };
 		78FB8A962C82385C00F67193 /* DeviceRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */; };
 		78FB8A982C8255B900F67193 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A972C8255B900F67193 /* QRScannerView.swift */; };
@@ -65,6 +71,10 @@
 
 /* Begin PBXFileReference section */
 		783452F82C84F3C600E0FC95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		787634D52C8F57DF00377091 /* PasswordHelperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHelperView.swift; sourceTree = "<group>"; };
+		787634D72C8F996600377091 /* WiFiSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSetupView.swift; sourceTree = "<group>"; };
+		787634D92C8FA8E900377091 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
+		787634DB2C8FD9CF00377091 /* WiFiSetupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WiFiSetupViewModel.swift; path = PlantPulse/Models/WiFiSetupViewModel.swift; sourceTree = SOURCE_ROOT; };
 		787E7EBC2C77E220006FCAE1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		787E7EBE2C77E2FE006FCAE1 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		787E7EC02C77E3C3006FCAE1 /* Reading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reading.swift; sourceTree = "<group>"; };
@@ -96,6 +106,8 @@
 		7893848A2C756F6000A54C68 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		7893848C2C75721000A54C68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationHelper.swift; sourceTree = "<group>"; };
+		78B461862C90A75600ECDB4A /* WiFiSignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSignalView.swift; sourceTree = "<group>"; };
+		78B461882C91068F00ECDB4A /* PlantIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantIdView.swift; sourceTree = "<group>"; };
 		78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationView.swift; sourceTree = "<group>"; };
 		78FB8A972C8255B900F67193 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
 		78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
@@ -222,6 +234,11 @@
 				78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */,
 				78FB8A972C8255B900F67193 /* QRScannerView.swift */,
 				78FB8A9B2C82586300F67193 /* DevicesView.swift */,
+				787634D52C8F57DF00377091 /* PasswordHelperView.swift */,
+				787634D72C8F996600377091 /* WiFiSetupView.swift */,
+				787634D92C8FA8E900377091 /* DeviceInfoView.swift */,
+				78B461862C90A75600ECDB4A /* WiFiSignalView.swift */,
+				78B461882C91068F00ECDB4A /* PlantIdView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +252,7 @@
 				78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */,
 				78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */,
 				78FB8AA32C83B18B00F67193 /* DeviceRegistrationViewModel.swift */,
+				787634DB2C8FD9CF00377091 /* WiFiSetupViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -242,6 +260,7 @@
 		7893847E2C751D0000A54C68 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */,
 				789384842C75215B00A54C68 /* APIHelper.swift */,
 				789384862C7539C600A54C68 /* KeychainHelper.swift */,
 				787E7ED82C7F6036006FCAE1 /* UserDefaultsHelper.swift */,
@@ -253,7 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				789384882C753D9800A54C68 /* NetworkConstants.swift */,
-				7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -395,28 +413,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				78FB8A9A2C82571C00F67193 /* QRScannerViewModel.swift in Sources */,
+				787634D62C8F57DF00377091 /* PasswordHelperView.swift in Sources */,
 				787E7ED52C7BC9F6006FCAE1 /* DevicesResponse.swift in Sources */,
 				787E7EBD2C77E220006FCAE1 /* User.swift in Sources */,
 				787E7EC52C7A2E0C006FCAE1 /* RegisterViewModel.swift in Sources */,
 				7893847A2C75080A00A54C68 /* LoginView.swift in Sources */,
 				78FB8A982C8255B900F67193 /* QRScannerView.swift in Sources */,
+				787634D82C8F996600377091 /* WiFiSetupView.swift in Sources */,
 				787E7ED72C7D3D1B006FCAE1 /* RegistrationError.swift in Sources */,
 				78FB8AA02C83ABAE00F67193 /* Plant.swift in Sources */,
 				7893848F2C764CBC00A54C68 /* ExpirationHelper.swift in Sources */,
 				789384892C753D9800A54C68 /* NetworkConstants.swift in Sources */,
 				787E7ECF2C7A536C006FCAE1 /* SettingsView.swift in Sources */,
 				7893844B2C6F84F600A54C68 /* ContentView.swift in Sources */,
+				787634DA2C8FA8E900377091 /* DeviceInfoView.swift in Sources */,
 				787E7EBF2C77E2FE006FCAE1 /* Device.swift in Sources */,
 				787E7ED92C7F6036006FCAE1 /* UserDefaultsHelper.swift in Sources */,
 				787E7EC92C7A3956006FCAE1 /* UserResponse.swift in Sources */,
 				789384872C7539C600A54C68 /* KeychainHelper.swift in Sources */,
 				78FB8A9C2C82586300F67193 /* DevicesView.swift in Sources */,
 				787E7ECB2C7A52DD006FCAE1 /* HomeView.swift in Sources */,
+				787634DC2C8FD9CF00377091 /* WiFiSetupViewModel.swift in Sources */,
 				78FB8AA42C83B18B00F67193 /* DeviceRegistrationViewModel.swift in Sources */,
 				78FB8AA22C83AF3100F67193 /* PlantsResponse.swift in Sources */,
 				789384492C6F84F600A54C68 /* PlantPulseApp.swift in Sources */,
 				787E7EC12C77E3C3006FCAE1 /* Reading.swift in Sources */,
 				787E7EC32C780ACC006FCAE1 /* Profile.swift in Sources */,
+				78B461892C91068F00ECDB4A /* PlantIdView.swift in Sources */,
+				78B461872C90A75600ECDB4A /* WiFiSignalView.swift in Sources */,
 				7893848B2C756F6000A54C68 /* RegisterView.swift in Sources */,
 				789384852C75215B00A54C68 /* APIHelper.swift in Sources */,
 				787E7ED12C7A8E3B006FCAE1 /* HomeViewModel.swift in Sources */,

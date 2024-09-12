@@ -9,16 +9,18 @@ import Foundation
 
 struct Device: Identifiable, Codable {
     let id: String
-    let deviceMAC: String
-    let plantType: String
+    let deviceUUID: String
+    let connectedDevices: [Device]
+    let plants: [Plant]
     let user: String
     let createdAt: String
     let updatedAt: String
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case deviceMAC
-        case plantType
+        case deviceUUID
+        case connectedDevices
+        case plants
         case user
         case createdAt
         case updatedAt
