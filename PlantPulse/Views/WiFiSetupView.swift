@@ -18,13 +18,19 @@ struct WiFiSetupView: View {
         VStack {
             List(viewModel.wifiNetworks, id: \.ssid) { network in
                 HStack {
+                    if let error = viewModel.connectionError {
+                        Text(error)
+                            .foregroundColor(.red)
+                    }
                     WiFiSignalView(rssi: network.rssi)
                     Button(network.ssid) {
                         selectedSSID = network.ssid
+                        isPasswordSheetPresented = true
                     }
+                    .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                 }
             }
-            NavigationLink(destination: PlantIdView()){
+            NavigationLink(destination: PlantIDView()){
                 Text("Proceed to Plant Identification.")
             }
         }
@@ -47,7 +53,7 @@ struct WiFiSetupView: View {
             })
         }
         .navigationDestination(isPresented: $viewModel.isConnected) {
-            PlantIdView()  // Next view in the setup process
+            PlantIDView()  // Next view in the setup process
         }
     }
 }

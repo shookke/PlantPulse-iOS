@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78531BE22C9E014200404054 /* PlantIDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78531BE12C9E014200404054 /* PlantIDViewModel.swift */; };
+		78531BE42C9E03B900404054 /* PlantTypesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78531BE32C9E03B900404054 /* PlantTypesResponse.swift */; };
 		787634D62C8F57DF00377091 /* PasswordHelperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D52C8F57DF00377091 /* PasswordHelperView.swift */; };
 		787634D82C8F996600377091 /* WiFiSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D72C8F996600377091 /* WiFiSetupView.swift */; };
 		787634DA2C8FA8E900377091 /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D92C8FA8E900377091 /* DeviceInfoView.swift */; };
@@ -40,11 +42,11 @@
 		7893848D2C75721000A54C68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848C2C75721000A54C68 /* MainView.swift */; };
 		7893848F2C764CBC00A54C68 /* ExpirationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */; };
 		78B461872C90A75600ECDB4A /* WiFiSignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B461862C90A75600ECDB4A /* WiFiSignalView.swift */; };
-		78B461892C91068F00ECDB4A /* PlantIdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B461882C91068F00ECDB4A /* PlantIdView.swift */; };
+		78B461892C91068F00ECDB4A /* PlantIDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B461882C91068F00ECDB4A /* PlantIDView.swift */; };
+		78E698542C97340D0086FD68 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E698532C97340D0086FD68 /* ScheduleView.swift */; };
 		78FB8A942C7FC30300F67193 /* ESPProvision in Frameworks */ = {isa = PBXBuildFile; productRef = 78FB8A932C7FC30300F67193 /* ESPProvision */; };
 		78FB8A962C82385C00F67193 /* DeviceRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */; };
 		78FB8A982C8255B900F67193 /* QRScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A972C8255B900F67193 /* QRScannerView.swift */; };
-		78FB8A9A2C82571C00F67193 /* QRScannerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */; };
 		78FB8A9C2C82586300F67193 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9B2C82586300F67193 /* DevicesView.swift */; };
 		78FB8A9E2C83A98300F67193 /* DevicesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */; };
 		78FB8AA02C83ABAE00F67193 /* Plant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9F2C83ABAE00F67193 /* Plant.swift */; };
@@ -71,6 +73,8 @@
 
 /* Begin PBXFileReference section */
 		783452F82C84F3C600E0FC95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		78531BE12C9E014200404054 /* PlantIDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantIDViewModel.swift; sourceTree = "<group>"; };
+		78531BE32C9E03B900404054 /* PlantTypesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantTypesResponse.swift; sourceTree = "<group>"; };
 		787634D52C8F57DF00377091 /* PasswordHelperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordHelperView.swift; sourceTree = "<group>"; };
 		787634D72C8F996600377091 /* WiFiSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSetupView.swift; sourceTree = "<group>"; };
 		787634D92C8FA8E900377091 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
@@ -107,10 +111,10 @@
 		7893848C2C75721000A54C68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7893848E2C764CBC00A54C68 /* ExpirationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpirationHelper.swift; sourceTree = "<group>"; };
 		78B461862C90A75600ECDB4A /* WiFiSignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WiFiSignalView.swift; sourceTree = "<group>"; };
-		78B461882C91068F00ECDB4A /* PlantIdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantIdView.swift; sourceTree = "<group>"; };
+		78B461882C91068F00ECDB4A /* PlantIDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantIDView.swift; sourceTree = "<group>"; };
+		78E698532C97340D0086FD68 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		78FB8A952C82385C00F67193 /* DeviceRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistrationView.swift; sourceTree = "<group>"; };
 		78FB8A972C8255B900F67193 /* QRScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerView.swift; sourceTree = "<group>"; };
-		78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewModel.swift; sourceTree = "<group>"; };
 		78FB8A9B2C82586300F67193 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewModel.swift; sourceTree = "<group>"; };
 		78FB8A9F2C83ABAE00F67193 /* Plant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plant.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 				787E7ED62C7D3D1B006FCAE1 /* RegistrationError.swift */,
 				78FB8A9F2C83ABAE00F67193 /* Plant.swift */,
 				78FB8AA12C83AF3100F67193 /* PlantsResponse.swift */,
+				78531BE32C9E03B900404054 /* PlantTypesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -238,7 +243,8 @@
 				787634D72C8F996600377091 /* WiFiSetupView.swift */,
 				787634D92C8FA8E900377091 /* DeviceInfoView.swift */,
 				78B461862C90A75600ECDB4A /* WiFiSignalView.swift */,
-				78B461882C91068F00ECDB4A /* PlantIdView.swift */,
+				78B461882C91068F00ECDB4A /* PlantIDView.swift */,
+				78E698532C97340D0086FD68 /* ScheduleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,10 +255,10 @@
 				787E7EC22C780ACC006FCAE1 /* Profile.swift */,
 				787E7EC42C7A2E0C006FCAE1 /* RegisterViewModel.swift */,
 				787E7ED02C7A8E3B006FCAE1 /* HomeViewModel.swift */,
-				78FB8A992C82571C00F67193 /* QRScannerViewModel.swift */,
 				78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */,
 				78FB8AA32C83B18B00F67193 /* DeviceRegistrationViewModel.swift */,
 				787634DB2C8FD9CF00377091 /* WiFiSetupViewModel.swift */,
+				78531BE12C9E014200404054 /* PlantIDViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -343,7 +349,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					789384442C6F84F600A54C68 = {
 						CreatedOnToolsVersion = 14.2;
@@ -412,7 +418,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78FB8A9A2C82571C00F67193 /* QRScannerViewModel.swift in Sources */,
 				787634D62C8F57DF00377091 /* PasswordHelperView.swift in Sources */,
 				787E7ED52C7BC9F6006FCAE1 /* DevicesResponse.swift in Sources */,
 				787E7EBD2C77E220006FCAE1 /* User.swift in Sources */,
@@ -428,18 +433,21 @@
 				7893844B2C6F84F600A54C68 /* ContentView.swift in Sources */,
 				787634DA2C8FA8E900377091 /* DeviceInfoView.swift in Sources */,
 				787E7EBF2C77E2FE006FCAE1 /* Device.swift in Sources */,
+				78531BE22C9E014200404054 /* PlantIDViewModel.swift in Sources */,
 				787E7ED92C7F6036006FCAE1 /* UserDefaultsHelper.swift in Sources */,
 				787E7EC92C7A3956006FCAE1 /* UserResponse.swift in Sources */,
 				789384872C7539C600A54C68 /* KeychainHelper.swift in Sources */,
 				78FB8A9C2C82586300F67193 /* DevicesView.swift in Sources */,
 				787E7ECB2C7A52DD006FCAE1 /* HomeView.swift in Sources */,
+				78531BE42C9E03B900404054 /* PlantTypesResponse.swift in Sources */,
 				787634DC2C8FD9CF00377091 /* WiFiSetupViewModel.swift in Sources */,
 				78FB8AA42C83B18B00F67193 /* DeviceRegistrationViewModel.swift in Sources */,
 				78FB8AA22C83AF3100F67193 /* PlantsResponse.swift in Sources */,
 				789384492C6F84F600A54C68 /* PlantPulseApp.swift in Sources */,
 				787E7EC12C77E3C3006FCAE1 /* Reading.swift in Sources */,
+				78E698542C97340D0086FD68 /* ScheduleView.swift in Sources */,
 				787E7EC32C780ACC006FCAE1 /* Profile.swift in Sources */,
-				78B461892C91068F00ECDB4A /* PlantIdView.swift in Sources */,
+				78B461892C91068F00ECDB4A /* PlantIDView.swift in Sources */,
 				78B461872C90A75600ECDB4A /* WiFiSignalView.swift in Sources */,
 				7893848B2C756F6000A54C68 /* RegisterView.swift in Sources */,
 				789384852C75215B00A54C68 /* APIHelper.swift in Sources */,
@@ -521,6 +529,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -581,6 +590,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -607,6 +617,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlantPulse/Preview Content\"";
+				DEVELOPMENT_TEAM = 982V56F7CN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantPulse/Info.plist;
@@ -640,6 +651,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PlantPulse/Preview Content\"";
+				DEVELOPMENT_TEAM = 982V56F7CN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PlantPulse/Info.plist;
@@ -668,10 +680,10 @@
 		789384722C6F84FE00A54C68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982V56F7CN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
@@ -687,10 +699,10 @@
 		789384732C6F84FE00A54C68 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982V56F7CN;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
@@ -706,9 +718,9 @@
 		789384752C6F84FE00A54C68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982V56F7CN;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.plantpulse.PlantPulseUITests;
@@ -723,9 +735,9 @@
 		789384762C6F84FE00A54C68 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 982V56F7CN;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = app.plantpulse.PlantPulseUITests;

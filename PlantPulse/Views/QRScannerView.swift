@@ -17,73 +17,133 @@ struct QRScannerView: View {
     @State private var testImage: UIImage? = nil
 
     var body: some View {
-            VStack {
-                if let device = viewModel.device {
-                    Text("Device Scanned: \(device.name)")
-                    Image(systemName: "circle.dotted")
-                        .onAppear {
-
-                            do {
-                                connectToDevice(device: device, mode: "test")
-                            }
-                        }
-                } else {
+        VStack {
+            if let device = viewModel.device {
+                Text("Device Scanned: \(device.name)")
+                Image(systemName: "circle.dotted")
+                    .onAppear {
+                        connectToDevice(device: device)
+                    }
+            } else {
+                Button(action:{
+                    isPresentingScanner = true
+                }) {
                     Text("Scan Device QR code")
-                    Button("Test with QR Image") {
-                        testImage = UIImage(named: "ProvisioningQRCode") // Replace with your test image
-                        isPresentingScanner.toggle()
-                    }
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
                 }
             }
-            .sheet(isPresented: $isPresentingScanner, content: {
-                if let testImage = testImage {
-                    // Simulated QR code scanning for testing in simulator or preview
-                    QRCodeScannerTestView(
-                        testImage: testImage,
-                        onDeviceScanned: { device in
-                            viewModel.device = device
-                            isPresentingScanner = false
-                        }
-                    )
-                } else {
-                    QRCodeScannerView(
-                        page: self,
-                        onDeviceScanned: { device in
-                            viewModel.device = device
-                            isPresentingScanner = false
-                        },
-                        previewLayerView: UIView() // Replace with custom UIView if necessary
-                    )
-                }
-            })
-            .onAppear {
-                // Automatically trigger the scanner when the view appears
-                isPresentingScanner = true
-            }
-            .navigationDestination(isPresented: $deviceConnected) {
-                WiFiSetupView()
-                    .environmentObject(viewModel)
-            }
-    }
-    // Function to handle device connection and navigate on success
-    private func connectToDevice(device: ESPDevice, mode: String?) {
-        switch mode {
-            case "test":
-                deviceConnected = true
-            default:
-                device.connect { result in
-                    switch result {
-                    case .connected:
-                        print("Device connected successfully.")
-                        deviceConnected = true
-                    case .failedToConnect(let error):
-                        print("Failed to connect to the device: \(error.localizedDescription)")
-                        // Handle failure if needed
-                    case .disconnected:
-                        print("Device disconnected")
-                    }
-                }
         }
+        .sheet(isPresented: $isPresentingScanner, content: {
+            QRCodeScannerView { result in
+                switch result {
+                case .success(let device):
+                    viewModel.device = device
+                    isPresentingScanner = false
+                case .failure(let error):
+                    connectionError = error.localizedDescription
+                    isPresentingScanner = false
+                }
+            }
+        })
+        .navigationDestination(isPresented: $deviceConnected) {
+            WiFiSetupView()
+                .environmentObject(viewModel)
+        }
+    }
+
+    private func connectToDevice(device: ESPDevice) {
+        device.connect { result in
+            switch result {
+            case .connected:
+                print("Device connected successfully.")
+                deviceConnected = true
+            case .failedToConnect(let error):
+                print("Failed to connect to the device: \(error.localizedDescription)")
+            case .disconnected:
+                print("Device disconnected")
+            }
+        }
+    }
+}
+
+struct QRCodeScannerView: UIViewControllerRepresentable {
+    var completionHandler: (Result<ESPDevice, Error>) -> Void
+
+    func makeUIViewController(context: Context) -> QRScannerViewController {
+        let scannerVC = QRScannerViewController()
+        scannerVC.completionHandler = completionHandler
+        return scannerVC
+    }
+
+    func updateUIViewController(_ uiViewController: QRScannerViewController, context: Context) {}
+}
+
+class QRScannerViewController: UIViewController {
+    var completionHandler: ((Result<ESPDevice, Error>) -> Void)?
+
+    // Connection status label
+    private var statusLabel: UILabel?
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setupStatusLabel()
+        startScanning()
+    }
+
+    private func startScanning() {
+        ESPProvisionManager.shared.scanQRCode(scanView: view) { device, error in
+            if let device = device {
+                self.completionHandler?(.success(device))
+            } else if let error = error {
+                self.completionHandler?(.failure(error))
+            }
+        } scanStatus: { status in
+            print("Scan status: \(status)")
+        }
+    }
+    
+    private func setupStatusLabel() {
+        // Create and configure the status label
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        label.textColor = UIColor.white
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.text = "Scanning for device..."
+
+        // Add the label to the main view
+        view.addSubview(label)
+        self.statusLabel = label
+
+        // Set constraints to position the label at the bottom of the screen
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            label.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            label.heightAnchor.constraint(equalToConstant: 50)
+        ])
+
+        // Ensure the label is on top of all other views
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.view.bringSubviewToFront(label)
+        }
+    }
+
+    // Update the status label to show the connection message upon successful QR scan
+    private func updateStatusLabelForSuccess() {
+        DispatchQueue.main.async {
+            self.statusLabel?.text = "Device found. Attempting to connect..."
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ESPProvisionManager.shared.stopScan()
     }
 }
 
@@ -98,37 +158,3 @@ extension QRScannerView: ESPDeviceConnectionDelegate {
         completionHandler(username)
     }
 }
-
-struct QRCodeScannerTestView: View {
-    var testImage: UIImage
-    var onDeviceScanned: (ESPDevice) -> Void
-
-    var body: some View {
-        VStack {
-            Text("Simulated QR Code Scanning")
-            Image(uiImage: testImage)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200)
-                .onAppear {
-                    simulateScanningQRCode(image: testImage)
-                }
-        }
-    }
-
-    func simulateScanningQRCode(image: UIImage) {
-        // Here we simulate the QR code scanning process
-        // This is where you would handle the image processing, e.g., using a QR code library
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            // Simulating successful device scan after processing the image
-            let mockDevice = ESPDevice(name: "PROV_76D214", security: .secure, transport: .ble, proofOfPossession: "abcd1234")
-            onDeviceScanned(mockDevice)
-        }
-    }
-}
-
-//struct QRScannerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QRScannerView()
-//    }
-//}

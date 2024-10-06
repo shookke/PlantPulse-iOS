@@ -10,32 +10,14 @@ import SwiftUI
 struct WiFiSignalView: View {
     let rssi: Int32
     
-    // Function to map RSSI value to SF Symbols
-    func wifiSymbol(for rssi: Int32) -> String {
-        switch rssi {
-        case (-50)...:
-            return "wifi" // Excellent signal
-        case (-70)...:
-            return "wifi" // Good signal
-        case (-80)...:
-            return "wifi" // Fair signal
-        case ..<(-80):
-            return "wifi.exclamationmark" // Weak signal or no connection
-        default:
-            return "wifi.slash" // No signal
-        }
-    }
-    
     var body: some View {
-        Image(systemName: wifiSymbol(for: rssi))
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 30, height: 30)
-            .foregroundColor(signalColor(for: rssi))
-    }
+            let normalizedRSSI = min(max(Double(rssi + 100) / 60.0, 0.0), 1.0)  // Normalize rssi between 0 and 1
+            return Image(systemName: rssi > -100 ? "wifi" : "wifi.slash", variableValue: normalizedRSSI)
+                .foregroundColor(signalColor(for: Double(rssi)))
+        }
     
     // Optional: Different colors for signal strength
-    func signalColor(for rssi: Int32) -> Color {
+    func signalColor(for rssi: Double) -> Color {
         switch rssi {
         case (-50)...:
             return .green // Excellent

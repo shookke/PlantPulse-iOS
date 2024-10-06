@@ -13,19 +13,15 @@ struct DeviceInfoView: View {
     var body: some View {
         VStack{
             Text(device.deviceUUID)
-            List(device.plants) { plant in
-                Text(plant.plantType.name)
+            List(device.plants.compactMap { $0 }) { (plant: Plant) in
+                Text(plant.plantType.commonName)
             }
-            List(device.connectedDevices) { connectedDevice  in
-                Text(connectedDevice.deviceUUID)
+            if !device.connectedDevices.isEmpty {
+                List(device.connectedDevices) { (connectedDevice: Device)  in
+                    Text(connectedDevice.deviceUUID)
+                }
             }
         }
     }
 }
 
-struct DeviceInfoView_Previews: PreviewProvider {
-    static var testDevice = Device(id: "12344", deviceUUID: "123456", connectedDevices: [], plants: [], user: "123", createdAt: "123", updatedAt: "123")
-    static var previews: some View {
-        DeviceInfoView(device: testDevice)
-    }
-}

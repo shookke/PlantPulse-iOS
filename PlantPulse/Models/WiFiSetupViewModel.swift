@@ -21,6 +21,7 @@ class WiFiSetupViewModel: ObservableObject {
     }
     
     func fetchWifiNetworks() {
+        print("Fetching Wifi Networks.")
         device?.scanWifiList { [weak self] wifiList, error in
             if let error = error {
                 DispatchQueue.main.async {

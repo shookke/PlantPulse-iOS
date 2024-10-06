@@ -27,7 +27,7 @@ extension RegisterViewModel {
         if !isValid() {
             return
         }
-        guard let url = URL(string: "\(NetworkConstants.baseURL)/users/register") else {
+        guard let url = URL(string: "\(NetworkConstants.baseURL)/users/") else {
             throw APIError.invalidURL
         }
         

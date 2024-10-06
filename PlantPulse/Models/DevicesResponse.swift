@@ -9,5 +9,4 @@ import Foundation
 
 struct DevicesResponse: Codable {
     let devices: [Device]
-    
 }

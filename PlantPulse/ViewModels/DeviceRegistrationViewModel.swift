@@ -20,8 +20,9 @@ class DeviceRegistrationViewModel: ObservableObject {
     }
     
     func fetchWifiNetworks() {
-        device?.scanWifiList { [weak self] wifiList, error in
+        device?.scanWifiList() { [weak self] wifiList, error in
             if let error = error {
+
                 DispatchQueue.main.async {
                     self?.connectionError = error.localizedDescription
                 }
