@@ -7,15 +7,35 @@
 
 import Foundation
 
-enum APIError: Error {
+enum APIError: Error, LocalizedError {
     case invalidURL
-    case invalidRequestBody
-    case invalidResponse
-    case noData
-    case decodingError
-    case unauthorized
     case serverError
+    case decodingError
+    case encodingError
+    case custom(String)
+    case unknownError
+    case noData // Added this case
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidURL:
+            return "The URL provided was invalid."
+        case .serverError:
+            return "There was an error with the server."
+        case .decodingError:
+            return "Failed to decode the response."
+        case .encodingError:
+            return "Failed to encode the request body."
+        case .custom(let message):
+            return message
+        case .unknownError:
+            return "An unknown error occurred."
+        case .noData:
+            return "No plant types available."
+        }
+    }
 }
+
 
 class APIHelper {
     static let shared = APIHelper()
@@ -40,7 +60,7 @@ class APIHelper {
                 let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
                 request.httpBody = jsonData
             } catch {
-                throw APIError.invalidRequestBody
+                throw APIError.encodingError
             }
         }
         

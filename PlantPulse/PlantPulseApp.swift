@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct PlantPulseApp: App {
     @StateObject var profile = Profile()
+    static let primary: Color = Color(red: 128, green: 125, blue: 123)
     
     var body: some Scene {
         WindowGroup {

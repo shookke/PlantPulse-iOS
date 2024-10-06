@@ -14,8 +14,9 @@ struct LoginView: View {
     
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
+                Spacer()
                 TextField("Email", text: $profile.email)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -39,7 +40,7 @@ struct LoginView: View {
                     Text("Login")
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(.primary)
                         .foregroundColor(.white)
                         .cornerRadius(8)
                 }
@@ -50,6 +51,7 @@ struct LoginView: View {
                         .padding()
                 }
                 .padding()
+                Spacer()
             }
             .padding()
             .navigationDestination(isPresented: $navigateToUserView) {
@@ -63,7 +65,15 @@ struct LoginView: View {
                     }
                 }
             }
+
         }
     }
     
+}
+
+struct LoginView_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginView()
+            .environmentObject(Profile())
+    }
 }

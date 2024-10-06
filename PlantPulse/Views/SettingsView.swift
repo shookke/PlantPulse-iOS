@@ -12,7 +12,7 @@ struct SettingsView: View {
     
     var body: some View {
         VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+            Text("Hello, \(profile.user.firstname + profile.user.lastname)")
             Spacer()
             Button(action: {
                 profile.signOut()
@@ -25,7 +25,6 @@ struct SettingsView: View {
                     .cornerRadius(8)
             }
             .padding()
-            
         }
     }
 }
@@ -33,5 +32,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(Profile())
     }
 }

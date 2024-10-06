@@ -12,23 +12,32 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem {
-                    Image(systemName: "house.fill")
-                }
-            DevicesView()
-                .tabItem {
-                    Image(systemName: "point.3.filled.connected.trianglepath.dotted")
-                }
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "person.fill")
-                }
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gearshape.fill")
-                }
+            Group {
+                HomeView()
+                    .tabItem {
+                        Image(systemName: "leaf")
+                        Text("My Plants")
+                    }
+                TasksView()
+                    .tabItem {
+                        Image(systemName: "checkmark.square.fill")
+                        Text("Tasks")
+                    }
+                DevicesView()
+                    .tabItem {
+                        Image(systemName: "sensor.fill")
+                        Text("Devices")
+                    }
+                SettingsView()
+                    .tabItem {
+                        Image(systemName: "gearshape.fill")
+                        Text("Settings")
+                    }
+            }
+            .toolbarBackground(.white, for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
         }
+        
         .tint(.green)
     }
 }

@@ -6,5 +6,5 @@
 //
 
 struct NetworkConstants {
-    static let baseURL = "http://10.200.11.143:3001/api"
+    static let baseURL = "https://plantpulse.app/api/v1"
 }
