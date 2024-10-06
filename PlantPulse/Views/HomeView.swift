@@ -13,15 +13,15 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(viewModel.plants) { plant in
-                    Text(plant.plantType.name)
+            VStack {
+                List(viewModel.plants.compactMap { $0 }) { (plant: Plant) in
+                    Text(plant.plantType.commonName)
                 }
+                .refreshable {
+                    viewModel.loadData()
+                }
+                .navigationTitle("My Plants")
             }
-            .refreshable {
-                viewModel.loadData()
-            }
-            .navigationTitle("My Plants")
         }
     }
 }

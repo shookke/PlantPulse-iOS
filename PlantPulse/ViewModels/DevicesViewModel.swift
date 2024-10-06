@@ -9,9 +9,7 @@ import Foundation
 import SwiftUI
 
 class DevicesViewModel: ObservableObject {
-    @EnvironmentObject var profile: Profile
-    
-    @Published var devices = [Device]()
+    @Published var devices: [Device] = []
     @Published var deviceLoadError: String? = ""
     
     init() {
@@ -34,12 +32,10 @@ extension DevicesViewModel {
             
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw APIError.serverError }
             
-            let decoder = JSONDecoder()
-            //decoder.dateDecodingStrategy = .iso8601 // Set the date decoding strategy
-            guard let data = try? decoder.decode(DevicesResponse.self, from: data) else { throw APIError.noData }
-            
+            guard let data = try? JSONDecoder().decode(DevicesResponse.self, from: data) else { throw APIError.noData }
+
             self.devices = data.devices
-            print(self.devices[0].plantType)
+            
             
         } catch {
             deviceLoadError = error.localizedDescription

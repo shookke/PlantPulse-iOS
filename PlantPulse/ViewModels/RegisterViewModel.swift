@@ -17,6 +17,9 @@ class RegisterViewModel: ObservableObject {
     @Published var registrationError: String?
     @Published var isSuccess: Bool = false
     
+    init(password: String){
+        self.password = password
+    }
 }
 extension RegisterViewModel {
     @MainActor
@@ -24,7 +27,7 @@ extension RegisterViewModel {
         if !isValid() {
             return
         }
-        guard let url = URL(string: "\(NetworkConstants.baseURL)/users/register") else {
+        guard let url = URL(string: "\(NetworkConstants.baseURL)/users/") else {
             throw APIError.invalidURL
         }
         
@@ -44,6 +47,7 @@ extension RegisterViewModel {
         guard (response as? HTTPURLResponse)?.statusCode == 201 else { throw APIError.serverError }
         
         guard let _ = try? JSONDecoder().decode(UserResponse.self, from: data) else {return}
+        
     }
     
     func isValid() -> Bool {

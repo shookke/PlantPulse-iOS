@@ -14,9 +14,9 @@ struct DevicesView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(viewModel.devices) { device in
-                    Text(device.plantType)
+            List (viewModel.devices, id: \.id) { device in
+                NavigationLink(destination: DeviceInfoView(device: device)) {
+                    Text(device.deviceUUID)
                 }
             }
             .refreshable {
@@ -25,16 +25,11 @@ struct DevicesView: View {
             .navigationTitle("My Devices")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showingAddDevice = true
-                    }) {
+                    NavigationLink(destination: DeviceRegistrationView()) {
                         Image(systemName: "plus")
                             .padding()
                     }
                 }
-            }
-            .navigationDestination(isPresented: $showingAddDevice) {
-                DeviceRegistrationView()
             }
         }
     }

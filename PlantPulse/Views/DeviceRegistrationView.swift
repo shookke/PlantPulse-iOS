@@ -12,9 +12,8 @@ struct DeviceRegistrationView: View {
     @StateObject private var viewModel = DeviceRegistrationViewModel()
     
     var body: some View {
-        NavigationStack {
             QRScannerView()
-        }
+                .environmentObject(viewModel)
     }
 }
 
