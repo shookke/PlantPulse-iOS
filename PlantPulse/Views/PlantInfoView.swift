@@ -9,12 +9,17 @@ import SwiftUI
 import Charts
 
 struct PlantInfoView: View {
+    @Environment(\.dismiss)var dismiss
+    
     @StateObject private var viewModel: PlantInfoViewModel
+    
     @State private var showingAddOptions = false
     @State private var showAddDeviceView = false
+    @State private var showDeletPlantView = false
+    @State private var isDeleted = false
     
-    init(plant: Plant) {
-        _viewModel = StateObject(wrappedValue: PlantInfoViewModel(plant: plant))
+    init(plant: Plant, areas: [Area]) {
+        _viewModel = StateObject(wrappedValue: PlantInfoViewModel(plant: plant, areas: areas))
     }
     
     var body: some View {
@@ -51,7 +56,7 @@ struct PlantInfoView: View {
                                             .frame(width: 20)
                                         RoundedRectangle(cornerRadius: 10)
                                             .fill(.blue)
-                                            .frame(width: 20, height: geometry.size.height * viewModel.readings[0].waterLevel)
+                                            .frame(width: 20, height: geometry.size.height * ((viewModel.readings[0].soilMoisture-200)/(1800)))
                                     }
                                 }
                             }
@@ -87,7 +92,7 @@ struct PlantInfoView: View {
                         Chart(viewModel.readings) {
                             LineMark(
                                 x: .value("Time", $0.createdAt),
-                                y: .value("Temperature", $0.lux)
+                                y: .value("Temperature", $0.lux ?? 0.0)
                             )
                             .foregroundStyle(.red)
                         }
@@ -127,6 +132,11 @@ struct PlantInfoView: View {
         .refreshable {
             viewModel.loadData()
         }
+        .onChange(of: viewModel.isDeleted) { isDeleted in
+            if isDeleted {
+                dismiss()
+            }
+        }
         .navigationTitle(viewModel.plant.plantName)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -144,12 +154,27 @@ struct PlantInfoView: View {
             Button("Add Device to Plant") {
                 showAddDeviceView = true
             }
+            Button("Remove Plant") {
+                showDeletPlantView = true
+            }
             Button("Cancel", role: .cancel) { }
         }
         .sheet(isPresented: $showAddDeviceView) {
             AddDeviceView { newDevice in
                 viewModel.loadData()
-            }
+            }.environmentObject(viewModel)
+        }
+        .alert(isPresented: $showDeletPlantView) {
+            Alert(
+                title: Text("Remove Plant"),
+                message: Text("Are you sure you want to remove this plant? This action cannot be undone."),
+                primaryButton: .destructive(Text("Remove")) {
+                    Task {
+                        await viewModel.removePlant()
+                    }
+                },
+                secondaryButton: .cancel()
+            )
         }
     }
 }
@@ -193,5 +218,5 @@ struct PlantInfoView: View {
         v:0,
         latestReading: nil)
     
-    PlantInfoView(plant: plant)
+    PlantInfoView(plant: plant, areas: [])
 }

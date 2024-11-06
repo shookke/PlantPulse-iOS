@@ -67,7 +67,7 @@ struct Device: Identifiable, Codable {
             connectedDevices = try container.decode([Device].self, forKey: .connectedDevices)
         } catch {
             print("Failed to decode connectedDevices: \(error)")
-            throw error
+            connectedDevices = []
         }
 
         do {

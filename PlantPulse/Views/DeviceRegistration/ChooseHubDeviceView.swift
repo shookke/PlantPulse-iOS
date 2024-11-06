@@ -30,12 +30,9 @@ struct ChooseHubDeviceView: View {
                 // Assign the selected device ID to the registrationViewModel
                 if let selectedId = selectedDeviceId {
                     viewModel.deviceToConnect = selectedId
-                    Task {
-                        try await viewModel.registerDevice()
-                    }
                 }
                 // Navigate to DeviceRegistrationCompletionView
-                navigationPath.append(DevicesViewDestination.deviceRegistrationCompletion)
+                navigationPath.append(DevicesViewDestination.plantId)
             }) {
                 Text("Confirm Selection")
                     .foregroundColor(.white)

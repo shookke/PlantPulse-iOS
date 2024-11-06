@@ -50,7 +50,7 @@ struct WiFiSetupView: View {
                 viewModel.isConnecting = false
                 // Append the destination to the navigationPath
                 DispatchQueue.main.async {
-                    navigationPath.append(DevicesViewDestination.plantId)
+                    navigationPath.append(DevicesViewDestination.deviceRegistrationCompletion)
                 }
             }
         }

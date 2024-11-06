@@ -20,12 +20,24 @@ struct DeviceRegistrationView: View {
     var body: some View {
         VStack {
             if let device = viewModel.device {
+                
                 Text("Device Scanned: \(device.name)")
                 Text("Connecting...")
                 ProgressView()
                     .onAppear {
                         connectToDevice(device: device)
                     }
+                if connectionError != nil {
+                    Text(connectionError!)
+                    Button("Continue") {
+                        navigationPath.append(DevicesViewDestination.chooseHubDevice)
+                    }
+                }
+                Spacer()
+                Button("Continue") {
+                    navigationPath.append(DevicesViewDestination.chooseHubDevice)
+                }
+                .padding()
             } else {
                 Button(action:{
                     viewModel.deviceType = "camera"
@@ -80,7 +92,9 @@ struct DeviceRegistrationView: View {
                     }
                 }
             case .failedToConnect(let error):
+                connectionError = error.localizedDescription
                 print("Failed to connect to the device: \(error.localizedDescription)")
+                
             case .disconnected:
                 print("Device disconnected")
             }

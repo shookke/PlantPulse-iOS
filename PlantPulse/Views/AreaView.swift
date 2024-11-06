@@ -23,7 +23,7 @@ struct AreaView: View {
             ScrollView{
                 LazyVGrid(columns: columns, spacing: 1) {
                     ForEach(plants) { plant in
-                        NavigationLink(destination: PlantInfoView(plant: plant)) {
+                        NavigationLink(destination: PlantInfoView(plant: plant, areas: [])) {
                             PlantCardView(plant: plant)
                         }
                     }
@@ -50,10 +50,14 @@ struct AreaView: View {
             }
             Button("Cancel", role: .cancel) { }
         }
-        .sheet(isPresented: $showAddPlantView) {
+        .sheet(isPresented: $showAddPlantView, onDismiss: refreshView) {
             AreaAddPlantView(areaId: area.id) { newPlant in
-                viewModel.loadData()
+                
             }
         }
+    }
+    
+    private func refreshView() {
+        viewModel.loadData()
     }
 }

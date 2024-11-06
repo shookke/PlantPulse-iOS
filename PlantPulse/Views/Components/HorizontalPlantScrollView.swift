@@ -9,12 +9,13 @@ import SwiftUI
 
 struct HorizontalPlantScrollView: View {
     let plants: [Plant]
+    let areas: [Area]
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 16) {
                 ForEach(plants) { plant in
-                    NavigationLink(destination: PlantInfoView(plant: plant)) {
+                    NavigationLink(destination: PlantInfoView(plant: plant, areas: areas)) {
                         PlantCardView(plant: plant)
                     }
                 }

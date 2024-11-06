@@ -75,6 +75,7 @@ struct Area: Identifiable, Hashable, Codable {
         case description
         case v = "__v"
     }
+    
 }
 
 extension Area {

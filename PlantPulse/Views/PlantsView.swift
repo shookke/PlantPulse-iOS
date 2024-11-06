@@ -15,7 +15,7 @@ struct PlantsView: View {
     var body: some View {
         NavigationStack {
             List(viewModel.plants.compactMap { $0 }) { (plant: Plant) in
-                NavigationLink(destination: PlantInfoView(plant: plant)) {
+                NavigationLink(destination: PlantInfoView(plant: plant, areas: [])) {
                     Text(plant.plantName)
                 }
             }

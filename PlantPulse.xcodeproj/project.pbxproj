@@ -69,8 +69,8 @@
 		78A3A9B92CD4071D00E2A3B5 /* AddDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A3A9B82CD4071600E2A3B5 /* AddDeviceView.swift */; };
 		78A3A9BD2CD4F7BE00E2A3B5 /* RemoveDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A3A9BC2CD4F7BC00E2A3B5 /* RemoveDeviceView.swift */; };
 		78A3A9BF2CD4F9B000E2A3B5 /* DeviceInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A3A9BE2CD4F9AD00E2A3B5 /* DeviceInfoViewModel.swift */; };
-		78A3A9C22CD54E9A00E2A3B5 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78A3A9C12CD54E9A00E2A3B5 /* Secrets.plist */; };
 		78A3A9C42CD5509200E2A3B5 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A3A9C32CD5508E00E2A3B5 /* Secrets.swift */; };
+		78A3A9C82CDA8CB800E2A3B5 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 78A3A9C72CDA8CAC00E2A3B5 /* Secrets.plist */; };
 		78E698542C97340D0086FD68 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E698532C97340D0086FD68 /* ScheduleView.swift */; };
 		78FB8A942C7FC30300F67193 /* ESPProvision in Frameworks */ = {isa = PBXBuildFile; productRef = 78FB8A932C7FC30300F67193 /* ESPProvision */; };
 		78FB8A9C2C82586300F67193 /* DevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FB8A9B2C82586300F67193 /* DevicesView.swift */; };
@@ -162,9 +162,9 @@
 		78A3A9B82CD4071600E2A3B5 /* AddDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDeviceView.swift; sourceTree = "<group>"; };
 		78A3A9BC2CD4F7BC00E2A3B5 /* RemoveDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveDeviceView.swift; sourceTree = "<group>"; };
 		78A3A9BE2CD4F9AD00E2A3B5 /* DeviceInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewModel.swift; sourceTree = "<group>"; };
-		78A3A9C12CD54E9A00E2A3B5 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 		78A3A9C32CD5508E00E2A3B5 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		78A3A9C52CD6B1DA00E2A3B5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		78A3A9C72CDA8CAC00E2A3B5 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secrets.plist; sourceTree = "<group>"; };
 		78E698532C97340D0086FD68 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		78FB8A9B2C82586300F67193 /* DevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesView.swift; sourceTree = "<group>"; };
 		78FB8A9D2C83A98300F67193 /* DevicesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewModel.swift; sourceTree = "<group>"; };
@@ -221,6 +221,7 @@
 		789384472C6F84F600A54C68 /* PlantPulse */ = {
 			isa = PBXGroup;
 			children = (
+				78A3A9C72CDA8CAC00E2A3B5 /* Secrets.plist */,
 				783452F82C84F3C600E0FC95 /* Info.plist */,
 				7893847F2C751D1100A54C68 /* Utilities */,
 				7893847E2C751D0000A54C68 /* Services */,
@@ -231,7 +232,6 @@
 				7893844A2C6F84F600A54C68 /* ContentView.swift */,
 				7893844C2C6F84FE00A54C68 /* Assets.xcassets */,
 				7893844E2C6F84FE00A54C68 /* Preview Content */,
-				78A3A9C12CD54E9A00E2A3B5 /* Secrets.plist */,
 			);
 			path = PlantPulse;
 			sourceTree = "<group>";
@@ -483,7 +483,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				789384502C6F84FE00A54C68 /* Preview Assets.xcassets in Resources */,
-				78A3A9C22CD54E9A00E2A3B5 /* Secrets.plist in Resources */,
+				78A3A9C82CDA8CB800E2A3B5 /* Secrets.plist in Resources */,
 				7893844D2C6F84FE00A54C68 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,43 +17,53 @@ struct DeviceInfoView: View {
     @Binding var navigationPath: NavigationPath
     
     var body: some View {
-        VStack{
-            HStack{
-                Text(device.deviceUUID)
-                Spacer()
+        VStack(alignment: .leading) {
+            HStack(alignment: .firstTextBaseline){
+                Text("Status: ")
+                    .font(.title2)
                 Image(systemName: setBatterySymbol(batteryLevel: device.batteryLevel))
+                    .font(.title2)
             }
-            .padding()
-            
+            .padding(.horizontal)
+            Text("Connected Device:")
+                .font(.title2)
+                .padding(.horizontal)
             List(device.connectedDevices.compactMap { $0 }) { (device: Device) in
                 HStack{
                     Text(device.deviceUUID)
-                        .font(.title2)
+                        .font(.title)
+                        
                     Spacer()
                     Image(systemName: setBatterySymbol(batteryLevel: device.batteryLevel))
                 }
-                if !device.plants.isEmpty {
-                    List(device.plants.compactMap { $0 }) { (plant: Plant) in
-                        Text(plant.plantName)
-                            .font(.title2)
+                if device.plants.isEmpty {
+                    EmptyView()
+                } else {
+                    ForEach(device.plants.compactMap { $0 }) { (plant: Plant) in
+                        Text("Plant Sensor is Monitoring")
+                            .fontWeight(.bold)
                         HStack {
-                            Text("Common Name")
+                            Text("Name:")
+                            Text(plant.plantName)
+                                .font(.title2)
+                        }
+                        HStack {
+                            Text("Common Name:")
                                 .fontWeight(.bold)
                             Text(plant.plantType.commonName)
                                 .font(.subheadline)
                         }
                         HStack {
-                            Text("Classification")
+                            Text("Classification:")
                                 .fontWeight(.bold)
                             Text(plant.plantType.scientificName)
                                 .font(.subheadline)
                         }
                     }
-                } else {
-                    EmptyView()
                 }
             }
         }
+        .navigationTitle(device.deviceUUID)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {

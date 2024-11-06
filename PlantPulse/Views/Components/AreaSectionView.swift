@@ -11,6 +11,7 @@ struct AreaSectionView: View {
     @Environment(\.colorScheme) var colorScheme
     
     let area: Area
+    let areas: [Area]
     let plants: [Plant]
 
     var body: some View {
@@ -31,7 +32,7 @@ struct AreaSectionView: View {
             .padding()
 
             // Horizontal Scroll View of Plants
-            HorizontalPlantScrollView(plants: plants)
+            HorizontalPlantScrollView(plants: plants, areas: areas)
         }
     }
 }

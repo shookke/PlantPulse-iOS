@@ -19,20 +19,22 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 2) {
                     // CondensedWeatherView at the top
                     weatherView // Use the weatherView computed property
-
+                    
                     // Iterate over each area
                     ForEach(viewModel.areas) { area in
-                        if let plantsInArea = viewModel.areaPlants[area] {
-                            AreaSectionView(area: area, plants: plantsInArea)
-                        }
+                        let plantsInArea = viewModel.areaPlants[area] ?? []
+                        AreaSectionView(area: area, areas: viewModel.areas, plants: plantsInArea)
                     }
                 }
                 .padding(.vertical)
             }
             .refreshable {
+                viewModel.loadData()
+            }
+            .task {
                 viewModel.loadData()
             }
             .navigationTitle("My Plants")
@@ -60,7 +62,7 @@ struct HomeView: View {
             .sheet(isPresented: $showAddPlantView) {
                 AddPlantView { newPlant in
                     viewModel.loadData()
-                }
+                }.environmentObject(DevicesViewModel())
             }
             .sheet(isPresented: $showAddAreaView) {
                 AddAreaView { newArea in

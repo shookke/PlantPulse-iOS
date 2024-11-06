@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 
-@MainActor
 class PlantTypeManager: ObservableObject {
     @Published var plantTypes: [PlantType] = []
     @Published var isLoading = false
@@ -19,7 +18,8 @@ class PlantTypeManager: ObservableObject {
     private var currentPage = 1
     private let limit = 20
     private var cancellables = Set<AnyCancellable>()
-
+    
+    @MainActor
     func loadPlantTypes() async {
         // Prevent multiple simultaneous loads and check if more data can be loaded
         guard !isLoading && canLoadMore else { return }
@@ -99,11 +99,13 @@ class PlantTypeManager: ObservableObject {
         // Reset loading state
         self.isLoading = false
     }
-
+    
+    @MainActor
     func loadMorePlantTypes() async {
         await loadPlantTypes()
     }
-
+    
+    @MainActor
     func resetAndLoadPlantTypes() async {
         currentPage = 1
         plantTypes = []

@@ -8,53 +8,42 @@
 import SwiftUI
 
 struct PlantIDView: View {
-    @EnvironmentObject var registrationViewModel: DevicesViewModel
-    @StateObject var viewModel = PlantIDViewModel()
-    @State private var isAnimating = false
+    @EnvironmentObject var viewModel: DevicesViewModel
+
+    @State private var showAddPlantView = false
+    
     @Binding var navigationPath: NavigationPath
     
     var body: some View {
         VStack {
-            Image(systemName: "leaf.fill")
-                .foregroundColor(.green)
-            Text("Please Select the plant type you wish to monitor.")
-                .padding()
-
-            // Loading State
-            if viewModel.isLoading {
-                VStack {
-                    Text("Loading Plant Types...")
-                    ProgressView()
-                }
-            } else {
-                // Plant List
-                List(viewModel.plantsList) { (plant: PlantType) in
-                    Button(action: {
-                        viewModel.plantTypeId = plant.id
-                    }) {
-                        HStack {
-                            // Safely unwrap and display the image
-                            if let imageURL = URL(string: plant.image ?? "") {
-                                AsyncImage(url: imageURL)
-                                    .frame(width: 50, height: 50)
-                            }
-                            VStack(alignment: .leading) {
-                                Text(plant.commonName)
-                                    .font(.headline)
-                                Text(plant.scientificName)
-                                    .font(.subheadline)
-                                    .fontWeight(.ultraLight)
-                            }
-                        }
-                    }
-                }
+            Button(action: {
+                showAddPlantView = true
+            }) {
+                Text("Add Plant")
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green)
+                    .cornerRadius(8)
+            }
+            .background(Color.green)
+            .padding(.vertical)
+            Button("Skip") {
+                navigationPath.append(DevicesViewDestination.deviceRegistrationCompletion)
             }
         }
-        .refreshable {
-            viewModel.loadData()
+        .onChange(of: showAddPlantView) { newValue in
+            if !newValue {
+                // Sheet was dismissed
+                navigationPath.append(DevicesViewDestination.deviceRegistrationCompletion)
+            }
         }
-        NavigationLink(destination: DeviceRegistrationCompletionView(navigationPath: $navigationPath)){
-            Text("Skip plant setup.");
+        .sheet(isPresented: $showAddPlantView) {
+            AddPlantView { newPlant in
+                viewModel.loadData()
+                showAddPlantView = false
+            }
+            
         }
     }
 }

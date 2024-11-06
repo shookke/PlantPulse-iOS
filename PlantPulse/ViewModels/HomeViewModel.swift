@@ -62,6 +62,7 @@ class HomeViewModel: ObservableObject {
         Task {
             await fetchAreas()
             await fetchPlants()
+            await groupPlantsByArea()
         }
         //requestLocationAndFetchWeather()
     }
@@ -70,7 +71,7 @@ class HomeViewModel: ObservableObject {
     @MainActor
     func fetchAreas() async {
         do {
-            guard let url = URL(string: "\(NetworkConstants.baseURL)/areas/") else {
+            guard let url = URL(string: "\(NetworkConstants.baseURL)/plants/areas/") else {
                 throw APIError.invalidURL
             }
             
@@ -84,7 +85,7 @@ class HomeViewModel: ObservableObject {
             let areasResponse = try decoder.decode(AreasResponse.self, from: data)
             
             self.areas = areasResponse.areas
-            groupPlantsByArea()
+            
         } catch {
             plantsLoadError = error.localizedDescription
         }
@@ -108,7 +109,7 @@ class HomeViewModel: ObservableObject {
             let plantsResponse = try decoder.decode(PlantsResponse.self, from: data)
             
             self.plants = plantsResponse.plants
-            groupPlantsByArea()
+
         } catch {
             plantsLoadError = error.localizedDescription
         }
@@ -116,17 +117,30 @@ class HomeViewModel: ObservableObject {
 
     // Group Plants by Area
     @MainActor
-    func groupPlantsByArea() {
-        var areaSet = Set<Area>()
+    func groupPlantsByArea() async {
         var dict = [Area: [Plant]]()
-
+        
+        // Add the No Area area
+        if !self.areas.contains(Area.noArea) {
+            self.areas.append(Area.noArea)
+        }
+        // Initialize areaPlants with all fetched areas mapped to empty arrays
+        for area in self.areas {
+            dict[area] = []
+        }
+        
+        // Assign plants to their respective areas
         for plant in plants {
             let area = plant.area ?? Area.noArea
-            areaSet.insert(area)
-            dict[area, default: []].append(plant)
+            if dict[area] != nil {
+                dict[area]?.append(plant)
+            }
         }
 
-        self.areas = Array(areaSet).sorted { $0.name < $1.name }
+        // Sort the areas alphabetically by name
+        self.areas = self.areas.sorted { $0.name < $1.name }
+
+        // Assign the grouped dictionary to areaPlants
         self.areaPlants = dict
     }
 

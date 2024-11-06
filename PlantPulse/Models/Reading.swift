@@ -12,11 +12,11 @@ struct Reading: Identifiable, Hashable, Codable {
     let imageFilename: String
     let temperature: Double
     let humidity: Double
-    let lux: Double
+    let lux: Double?
     let uvA: Double
     let uvB: Double
     let uvC: Double
-    let waterLevel: Double
+    let soilMoisture: Double
     let createdAt: Date
     let updatedAt: Date
     let v: Int
@@ -32,7 +32,7 @@ struct Reading: Identifiable, Hashable, Codable {
         case uvA
         case uvB
         case uvC
-        case waterLevel
+        case soilMoisture
         case createdAt
         case updatedAt
         case v = "__v"
@@ -76,9 +76,9 @@ struct Reading: Identifiable, Hashable, Codable {
             lux = try container.decode(Double.self, forKey: .lux)
         } catch {
             print("Failed to decode lux: \(error)")
-            throw error
+            lux = 0.0
         }
-
+        
         do {
             uvA = try container.decode(Double.self, forKey: .uvA)
         } catch {
@@ -101,7 +101,7 @@ struct Reading: Identifiable, Hashable, Codable {
         }
 
         do {
-            waterLevel = try container.decode(Double.self, forKey: .waterLevel)
+            soilMoisture = try container.decode(Double.self, forKey: .soilMoisture)
         } catch {
             print("Failed to decode waterLevel: \(error)")
             throw error

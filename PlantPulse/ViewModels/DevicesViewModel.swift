@@ -19,10 +19,19 @@ class DevicesViewModel: ObservableObject {
     @Published var deviceToConnect: String = ""
     @Published var plant: String? = nil
     @Published var plantType: String? = nil
-    @Published var connectionError: String?
+    @Published var plantName = ""
+    @Published var datePlanted: String?
+    @Published var dateHarvested: String?
+    @Published var lastFertilization: String?
+    @Published var selectedPlantType: PlantType?
+    @Published var isCreatingPlant = false
+    @Published var isPlantCreated = false
+    @Published var connectionError: String? = nil
     @Published var isConnecting = false
     @Published var isConnected = false
     @Published var isConfigApplied = false
+    @Published var errorMessage: String? = nil
+    @Published var isDeviceCreated = false
     
     init() {
         loadData()
@@ -43,10 +52,55 @@ class DevicesViewModel: ObservableObject {
             }
         }
         Task {
-            try await self.registerDevice()
+           try await registerDevice()
         }
     }
     
+    @MainActor
+    func createPlant() async {
+        // Make Sure there is a selected PlantType
+        guard let plantType = selectedPlantType else { return }
+        
+        // Set Statuses
+        isCreatingPlant = true
+        errorMessage = nil
+        
+        do {
+            // Prepare the request
+            guard let url = URL(string: "\(NetworkConstants.baseURL)/plants/") else {
+                throw APIError.invalidURL
+            }
+            
+            let newPlantData: [String: Any] = [
+                "plant": [
+                    "plantType": plantType.id,
+                    "container": nil,
+                    "area": nil,
+                    "plantName": plantName,
+                    "datePlanted": datePlanted,
+                    "dateHarvested": dateHarvested,
+                    "lastFertilization": lastFertilization
+                ]
+            ]
+            
+            let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: newPlantData)
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            guard (response as? HTTPURLResponse)?.statusCode == 201 else { throw APIError.serverError }
+            
+            guard let data = try? JSONDecoder().decode(Plant.self, from: data) else { throw APIError.noData }
+            
+            plant = data.id
+            
+        } catch (let error) {
+            errorMessage = error.localizedDescription
+        }
+        // Update status
+        isPlantCreated = true
+        isCreatingPlant = false
+    }
+
     @MainActor
     func registerDevice() async throws {
         if let device = device {
@@ -62,7 +116,9 @@ class DevicesViewModel: ObservableObject {
                     ]
                 ]
                 if deviceType == "sensor" {
+                    guard let plantTypeId = selectedPlantType?.id else { throw APIError.custom("PlantType Missing")}
                     registrationData["connectTo"] = deviceToConnect
+                    registrationData["plantId"] = plant
                 }
                 
                 let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: registrationData)
@@ -94,6 +150,7 @@ class DevicesViewModel: ObservableObject {
                 self.connectionError = error.localizedDescription
             }
         }
+        isDeviceCreated = true
     }
     
     func provisionDevice(ssid: String, passphrase: String) {
