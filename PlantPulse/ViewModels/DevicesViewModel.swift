@@ -16,7 +16,7 @@ class DevicesViewModel: ObservableObject {
     @Published var wifiNetworks: [ESPWifiNetwork] = []
     @Published var deviceType: String = ""
     @Published var deviceData = Data()
-    @Published var deviceToConnect: String = ""
+    @Published var deviceToConnect: String? = nil
     @Published var plant: String? = nil
     @Published var plantType: String? = nil
     @Published var plantName = ""
@@ -50,9 +50,6 @@ class DevicesViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self?.wifiNetworks = wifiList ?? []
             }
-        }
-        Task {
-           try await registerDevice()
         }
     }
     
@@ -115,17 +112,17 @@ class DevicesViewModel: ObservableObject {
                         "deviceType": deviceType
                     ]
                 ]
+
                 if deviceType == "sensor" {
-                    guard let plantTypeId = selectedPlantType?.id else { throw APIError.custom("PlantType Missing")}
                     registrationData["connectTo"] = deviceToConnect
                     registrationData["plantId"] = plant
                 }
-                
+
                 let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: registrationData)
-                
+
                 // Create and run the URLSession
                 let (data, response) = try await URLSession.shared.data(for: request)
-                
+
                 // Validate the response
                 guard (response as? HTTPURLResponse)?.statusCode == 201 else { throw APIError.serverError }
                 
@@ -147,6 +144,7 @@ class DevicesViewModel: ObservableObject {
                     }
                 }
             } catch {
+                print(error.localizedDescription)
                 self.connectionError = error.localizedDescription
             }
         }
@@ -176,6 +174,32 @@ class DevicesViewModel: ObservableObject {
                 }
             }
         }
+    }
+    
+    func reset() {
+        device?.disconnect()
+        device = nil
+        plant = nil
+        devices = []
+        deviceLoadError = ""
+        wifiNetworks = []
+        deviceType = ""
+        deviceData = Data()
+        deviceToConnect = nil
+        plantType = nil
+        plantName = ""
+        datePlanted = nil
+        dateHarvested = nil
+        lastFertilization = nil
+        selectedPlantType = nil
+        isConnected = false
+        isConnecting = false
+        isPlantCreated = false
+        isConfigApplied = false
+        isCreatingPlant = false
+        isDeviceCreated = false
+        connectionError = nil
+        errorMessage = nil
     }
     
     private func sendData(){

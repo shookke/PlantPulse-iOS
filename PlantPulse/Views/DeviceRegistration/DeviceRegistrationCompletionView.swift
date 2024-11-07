@@ -20,13 +20,13 @@ struct DeviceRegistrationCompletionView: View {
             
             Button(action: {
                 if viewModel.isDeviceCreated {
-                    viewModel.device?.disconnect()
-                    viewModel.device = nil
+                    viewModel.reset()
                     navigationPath = NavigationPath()
                 } else {
-                    isDone = true
-                    Task {
+                    print("Registering device")
+                    Task(priority: .userInitiated) {
                         try await viewModel.registerDevice()
+                        isDone = true
                     }
                 }
             }) {
@@ -38,8 +38,7 @@ struct DeviceRegistrationCompletionView: View {
             }
             .onReceive(viewModel.$isDeviceCreated) { isReady in
                 if isReady && isDone {
-                    viewModel.device?.disconnect()
-                    viewModel.device = nil
+                    viewModel.reset()
                     navigationPath = NavigationPath()
                 }
             }

@@ -104,7 +104,7 @@ struct Reading: Identifiable, Hashable, Codable {
             soilMoisture = try container.decode(Double.self, forKey: .soilMoisture)
         } catch {
             print("Failed to decode waterLevel: \(error)")
-            throw error
+            soilMoisture = 200
         }
 
         do {

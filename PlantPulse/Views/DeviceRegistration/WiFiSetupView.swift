@@ -17,13 +17,13 @@ struct WiFiSetupView: View {
     
     var body: some View {
         VStack {
-            if let error = viewModel.connectionError {
-                Text(error)
-                    .foregroundColor(.red)
-            }
             if viewModel.isConnecting {
                 Text("Connecting Device to WiFi")
                 ProgressView()
+            }
+            if let error = viewModel.connectionError {
+                Text(error)
+                    .foregroundColor(.red)
             }
             if viewModel.wifiNetworks.isEmpty {
                 Text("Searching For Available Networks")
@@ -40,10 +40,16 @@ struct WiFiSetupView: View {
                         .foregroundColor(.green)
                     }
                 }
+                .padding()
             }
         }
         .onAppear {
             viewModel.fetchWifiNetworks()
+        }
+        .onDisappear {
+            viewModel.wifiNetworks = []
+            viewModel.device?.disconnect()
+            viewModel.device = nil
         }
         .onChange(of: viewModel.isConnected) { isConnected in
             if isConnected {
@@ -61,6 +67,14 @@ struct WiFiSetupView: View {
                 sheet: $isPasswordSheetPresented,
                 navigationPath: $navigationPath,
                 onConnect: {
+                    viewModel.isConnecting  = true
+                    Task(priority: .userInitiated) {
+                        do {
+                            try await viewModel.registerDevice()
+                        } catch {
+                            print("Error registering the device.")
+                        }
+                    }
                     if let ssid = selectedSSID {
                         viewModel.provisionDevice(ssid: ssid, passphrase: wifiPassword)
                     }

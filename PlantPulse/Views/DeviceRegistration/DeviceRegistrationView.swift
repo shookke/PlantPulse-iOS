@@ -27,12 +27,6 @@ struct DeviceRegistrationView: View {
                     .onAppear {
                         connectToDevice(device: device)
                     }
-                if connectionError != nil {
-                    Text(connectionError!)
-                    Button("Continue") {
-                        navigationPath.append(DevicesViewDestination.chooseHubDevice)
-                    }
-                }
                 Spacer()
                 Button("Continue") {
                     navigationPath.append(DevicesViewDestination.chooseHubDevice)
@@ -81,7 +75,6 @@ struct DeviceRegistrationView: View {
         device.connect { result in
             switch result {
             case .connected:
-                print("Device connected successfully.")
                 if viewModel.deviceType == "camera" {
                     DispatchQueue.main.async {
                         navigationPath.append(DevicesViewDestination.wiFiSetup)
