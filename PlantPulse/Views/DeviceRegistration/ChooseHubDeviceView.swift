@@ -22,10 +22,6 @@ struct ChooseHubDeviceView: View {
             }
             .pickerStyle(MenuPickerStyle())
             .padding()
-            .onDisappear {
-                viewModel.device?.disconnect()
-                viewModel.device = nil
-            }
             Button(action: {
                 // Assign the selected device ID to the registrationViewModel
                 if let selectedId = selectedDeviceId {

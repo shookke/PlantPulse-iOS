@@ -12,7 +12,6 @@ struct Reading: Identifiable, Hashable, Codable {
     let imageFilename: String
     let temperature: Double
     let humidity: Double
-    let lux: Double?
     let uvA: Double
     let uvB: Double
     let uvC: Double
@@ -20,6 +19,7 @@ struct Reading: Identifiable, Hashable, Codable {
     let createdAt: Date
     let updatedAt: Date
     let v: Int
+    let lux: Double?
     let rgbImage: URL
     let ndviImage: URL
     
@@ -28,7 +28,6 @@ struct Reading: Identifiable, Hashable, Codable {
         case imageFilename
         case temperature
         case humidity
-        case lux
         case uvA
         case uvB
         case uvC
@@ -36,6 +35,7 @@ struct Reading: Identifiable, Hashable, Codable {
         case createdAt
         case updatedAt
         case v = "__v"
+        case lux
         case rgbImage
         case ndviImage
     }
@@ -146,14 +146,14 @@ struct Reading: Identifiable, Hashable, Codable {
             rgbImage = try container.decode(URL.self, forKey: .rgbImage)
         } catch {
             print("Failed to decode rgbImage: \(error)")
-            throw error
+            rgbImage = URL(filePath: "")!
         }
 
         do {
             ndviImage = try container.decode(URL.self, forKey: .ndviImage)
         } catch {
             print("Failed to decode ndviImage: \(error)")
-            throw error
+            ndviImage = URL(filePath: "")!
         }
     }
 }

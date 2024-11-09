@@ -101,6 +101,7 @@ class DevicesViewModel: ObservableObject {
     @MainActor
     func registerDevice() async throws {
         if let device = device {
+            print(device)
             do {
                 guard let url = URL(string: "\(NetworkConstants.baseURL)/devices/") else {
                     throw APIError.invalidURL
@@ -117,7 +118,7 @@ class DevicesViewModel: ObservableObject {
                     registrationData["connectTo"] = deviceToConnect
                     registrationData["plantId"] = plant
                 }
-
+                print(registrationData)
                 let request = try APIHelper.shared.formatRequest(url: url, method: "POST", body: registrationData)
 
                 // Create and run the URLSession

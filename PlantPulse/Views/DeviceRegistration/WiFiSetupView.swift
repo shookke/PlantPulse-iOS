@@ -48,8 +48,6 @@ struct WiFiSetupView: View {
         }
         .onDisappear {
             viewModel.wifiNetworks = []
-            viewModel.device?.disconnect()
-            viewModel.device = nil
         }
         .onChange(of: viewModel.isConnected) { isConnected in
             if isConnected {
