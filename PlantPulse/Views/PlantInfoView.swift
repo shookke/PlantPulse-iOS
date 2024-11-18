@@ -9,15 +9,24 @@ import SwiftUI
 import Charts
 
 struct PlantInfoView: View {
-    @Environment(\.dismiss)var dismiss
+    @Environment(\.dismiss) var dismiss
     
     @StateObject private var viewModel: PlantInfoViewModel
     
     @State private var showingAddOptions = false
     @State private var showAddDeviceView = false
-    @State private var showDeletPlantView = false
-    @State private var isDeleted = false
+    @State private var showDeletePlantView = false
     
+    // State variables for tooltips
+    @State private var selectedTemperatureReading: Reading?
+    @State private var selectedHumidityReading: Reading?
+    @State private var selectedLightReading: Reading?
+    @State private var selectedUVReading: Reading?
+    @State private var temperatureTooltipPosition: CGPoint = .zero
+    @State private var humidityTooltipPosition: CGPoint = .zero
+    @State private var lightTooltipPosition: CGPoint = .zero
+    @State private var uvTooltipPosition: CGPoint = .zero
+
     init(plant: Plant, areas: [Area]) {
         _viewModel = StateObject(wrappedValue: PlantInfoViewModel(plant: plant, areas: areas))
     }
@@ -42,9 +51,8 @@ struct PlantInfoView: View {
                                     .scaledToFit()
                                     .frame(width: 115, height: 200)
                             } placeholder: {
-                                ProgressView() // You can customize this placeholder
+                                ProgressView()
                             }
-
                             VStack{
                                 Image(systemName: "drop.fill", variableValue: 0.5)
                                     .imageScale(.large)
@@ -56,73 +64,209 @@ struct PlantInfoView: View {
                                             .frame(width: 20)
                                         RoundedRectangle(cornerRadius: 10)
                                             .fill(.blue)
-                                            .frame(width: 20, height: geometry.size.height * ((viewModel.readings[0].soilMoisture-200)/(1800)))
+                                            .frame(width: 20, height: geometry.size.height * ((viewModel.readings[0].soilMoisture - 200) / (1800)))
                                     }
                                 }
                             }
                             .frame(width: 20)
                         }
                         .padding(.horizontal)
+                        
+                        // Temperature Chart with Tooltip
                         Text("Temperature")
                             .font(.headline)
-                        Chart(viewModel.readings) {
+                        Chart(viewModel.readings) { reading in
                             LineMark(
-                                x: .value("Time", $0.createdAt),
-                                y: .value("Temperature", $0.temperature)
+                                x: .value("Time", reading.createdAt),
+                                y: .value("Temperature", reading.temperature)
                             )
                             .foregroundStyle(.red)
                         }
                         .frame(height: 200)
                         .padding()
+                        .chartOverlay { proxy in
+                            GeometryReader { geometry in
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .contentShape(Rectangle())
+                                    .gesture(
+                                        DragGesture()
+                                            .onChanged { value in
+                                                let location = value.location
+                                                if let date: Date = proxy.value(atX: location.x - geometry[proxy.plotAreaFrame].origin.x),
+                                                   let reading = findClosestReading(to: date) {
+                                                    selectedTemperatureReading = reading
+                                                    if let xPosition = proxy.position(forX: reading.createdAt),
+                                                       let yPosition = proxy.position(forY: reading.temperature) {
+                                                        temperatureTooltipPosition = CGPoint(
+                                                            x: xPosition + geometry[proxy.plotAreaFrame].origin.x,
+                                                            y: yPosition + geometry[proxy.plotAreaFrame].origin.y
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                            .onEnded { _ in
+                                                selectedTemperatureReading = nil
+                                            }
+                                    )
+                            }
+                        }
+                        .overlay(alignment: .topLeading) {
+                            if let reading = selectedTemperatureReading {
+                                TooltipView(reading: reading, valueKey: "temperature")
+                                    .position(x: temperatureTooltipPosition.x, y: temperatureTooltipPosition.y - 40)
+                            }
+                        }
                         
+                        // Humidity Chart with Tooltip
                         Text("Humidity")
                             .font(.headline)
-                        Chart(viewModel.readings) {
+                        Chart(viewModel.readings) { reading in
                             LineMark(
-                                x: .value("Time", $0.createdAt),
-                                y: .value("Lux", $0.humidity*100)
+                                x: .value("Time", reading.createdAt),
+                                y: .value("Humidity", reading.humidity)
                             )
                             .foregroundStyle(.blue)
                         }
                         .frame(height: 200)
                         .padding()
+                        .chartOverlay { proxy in
+                            GeometryReader { geometry in
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .contentShape(Rectangle())
+                                    .gesture(
+                                        DragGesture()
+                                            .onChanged { value in
+                                                let location = value.location
+                                                if let date: Date = proxy.value(atX: location.x - geometry[proxy.plotAreaFrame].origin.x),
+                                                   let reading = findClosestReading(to: date) {
+                                                    selectedHumidityReading = reading
+                                                    if let xPosition = proxy.position(forX: reading.createdAt),
+                                                       let yPosition = proxy.position(forY: reading.humidity) {
+                                                        humidityTooltipPosition = CGPoint(
+                                                            x: xPosition + geometry[proxy.plotAreaFrame].origin.x,
+                                                            y: yPosition + geometry[proxy.plotAreaFrame].origin.y
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                            .onEnded { _ in
+                                                selectedHumidityReading = nil
+                                            }
+                                    )
+                            }
+                        }
+                        .overlay(alignment: .topLeading) {
+                            if let reading = selectedHumidityReading {
+                                TooltipView(reading: reading, valueKey: "humidity")
+                                    .position(x: humidityTooltipPosition.x, y: humidityTooltipPosition.y - 40)
+                            }
+                        }
                         
+                        // Light Chart with Tooltip
                         Text("Light")
                             .font(.headline)
-                        Chart(viewModel.readings) {
+                        Chart(viewModel.readings) { reading in
                             LineMark(
-                                x: .value("Time", $0.createdAt),
-                                y: .value("Temperature", $0.lux ?? 0.0)
+                                x: .value("Time", reading.createdAt),
+                                y: .value("Light", reading.lux ?? 0.0)
                             )
-                            .foregroundStyle(.red)
+                            .foregroundStyle(.yellow)
                         }
                         .frame(height: 200)
                         .padding()
+                        .chartOverlay { proxy in
+                            GeometryReader { geometry in
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .contentShape(Rectangle())
+                                    .gesture(
+                                        DragGesture()
+                                            .onChanged { value in
+                                                let location = value.location
+                                                if let date: Date = proxy.value(atX: location.x - geometry[proxy.plotAreaFrame].origin.x),
+                                                   let reading = findClosestReading(to: date) {
+                                                    selectedLightReading = reading
+                                                    if let xPosition = proxy.position(forX: reading.createdAt),
+                                                       let yPosition = proxy.position(forY: reading.lux ?? 0.0) {
+                                                        lightTooltipPosition = CGPoint(
+                                                            x: xPosition + geometry[proxy.plotAreaFrame].origin.x,
+                                                            y: yPosition + geometry[proxy.plotAreaFrame].origin.y
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                            .onEnded { _ in
+                                                selectedLightReading = nil
+                                            }
+                                    )
+                            }
+                        }
+                        .overlay(alignment: .topLeading) {
+                            if let reading = selectedLightReading {
+                                TooltipView(reading: reading, valueKey: "lux")
+                                    .position(x: lightTooltipPosition.x, y: lightTooltipPosition.y - 40)
+                            }
+                        }
                         
+                        // UV Chart with Tooltip
                         Text("UV")
                             .font(.headline)
-                        Chart(viewModel.readings) {
-                            LineMark(
-                                x: .value("Time", $0.createdAt),
-                                y: .value("UV A", $0.uvA),
-                                series: .value("UV A", "A")
-                            )
-                            .foregroundStyle(.purple)
-                            LineMark(
-                                x: .value("Time", $0.createdAt),
-                                y: .value("UV B", $0.uvB),
-                                series: .value("UV B", "B")
-                            )
-                            .foregroundStyle(.green)
-                            LineMark(
-                                x: .value("Time", $0.createdAt),
-                                y: .value("UV C", $0.uvC),
-                                series: .value("UV C", "C")
-                            )
-                            .foregroundStyle(.orange)
+                        Chart {
+                            ForEach(viewModel.readings) { reading in
+                                LineMark(
+                                    x: .value("Time", reading.createdAt),
+                                    y: .value("UV A", reading.uvA)
+                                )
+                                .foregroundStyle(.purple)
+                                LineMark(
+                                    x: .value("Time", reading.createdAt),
+                                    y: .value("UV B", reading.uvB)
+                                )
+                                .foregroundStyle(.green)
+                                LineMark(
+                                    x: .value("Time", reading.createdAt),
+                                    y: .value("UV C", reading.uvC)
+                                )
+                                .foregroundStyle(.orange)
+                            }
                         }
                         .frame(height: 200)
                         .padding()
+                        .chartOverlay { proxy in
+                            GeometryReader { geometry in
+                                Rectangle()
+                                    .fill(Color.clear)
+                                    .contentShape(Rectangle())
+                                    .gesture(
+                                        DragGesture()
+                                            .onChanged { value in
+                                                let location = value.location
+                                                if let date: Date = proxy.value(atX: location.x - geometry[proxy.plotAreaFrame].origin.x),
+                                                   let reading = findClosestReading(to: date) {
+                                                    selectedUVReading = reading
+                                                    if let xPosition = proxy.position(forX: reading.createdAt),
+                                                       let yPosition = proxy.position(forY: reading.uvA) {
+                                                        uvTooltipPosition = CGPoint(
+                                                            x: xPosition + geometry[proxy.plotAreaFrame].origin.x,
+                                                            y: yPosition + geometry[proxy.plotAreaFrame].origin.y
+                                                        )
+                                                    }
+                                                }
+                                            }
+                                            .onEnded { _ in
+                                                selectedUVReading = nil
+                                            }
+                                    )
+                            }
+                        }
+                        .overlay(alignment: .topLeading) {
+                            if let reading = selectedUVReading {
+                                UVTooltipView(reading: reading)
+                                    .position(x: uvTooltipPosition.x, y: uvTooltipPosition.y - 40)
+                            }
+                        }
                     }
                 }
             } else {
@@ -155,7 +299,7 @@ struct PlantInfoView: View {
                 showAddDeviceView = true
             }
             Button("Remove Plant") {
-                showDeletPlantView = true
+                showDeletePlantView = true
             }
             Button("Cancel", role: .cancel) { }
         }
@@ -164,7 +308,7 @@ struct PlantInfoView: View {
                 viewModel.loadData()
             }.environmentObject(viewModel)
         }
-        .alert(isPresented: $showDeletPlantView) {
+        .alert(isPresented: $showDeletePlantView) {
             Alert(
                 title: Text("Remove Plant"),
                 message: Text("Are you sure you want to remove this plant? This action cannot be undone."),
@@ -177,7 +321,83 @@ struct PlantInfoView: View {
             )
         }
     }
+    
+    // Helper function to find the closest reading
+    private func findClosestReading(to date: Date) -> Reading? {
+        return viewModel.readings.min(by: { abs($0.createdAt.timeIntervalSince(date)) < abs($1.createdAt.timeIntervalSince(date)) })
+    }
 }
+
+// Tooltip for temperature, humidity, and light
+struct TooltipView: View {
+    let reading: Reading
+    let valueKey: String
+    
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(formattedDate(reading.createdAt))
+                .font(.caption)
+                .foregroundColor(.white)
+            Text(valueText)
+                .font(.headline)
+                .foregroundColor(.white)
+        }
+        .padding(5)
+        .background(Color.black.opacity(0.7))
+        .cornerRadius(5)
+    }
+    
+    private var valueText: String {
+        switch valueKey {
+        case "temperature":
+            return String(format: "Temp: %.0f°F", reading.temperature)
+        case "humidity":
+            return String(format: "Humidity: %.0f%%", reading.humidity)
+        case "lux":
+            return String(format: "Light: %.0f lux", reading.lux ?? 0.0)
+        default:
+            return ""
+        }
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        return formatter.string(from: date)
+    }
+}
+
+// Tooltip for UV readings
+struct UVTooltipView: View {
+    let reading: Reading
+    
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(formattedDate(reading.createdAt))
+                .font(.caption)
+                .foregroundColor(.white)
+            Text(String(format: "UV A: %.1f", reading.uvA))
+                .font(.headline)
+                .foregroundColor(.white)
+            Text(String(format: "UV B: %.1f", reading.uvB))
+                .font(.headline)
+                .foregroundColor(.white)
+            Text(String(format: "UV C: %.1f", reading.uvC))
+                .font(.headline)
+                .foregroundColor(.white)
+        }
+        .padding(5)
+        .background(Color.black.opacity(0.7))
+        .cornerRadius(5)
+    }
+    
+    private func formattedDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        return formatter.string(from: date)
+    }
+}
+
 
 #Preview {
     let plantType = PlantType(
