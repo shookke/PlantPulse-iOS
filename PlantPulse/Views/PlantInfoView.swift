@@ -16,6 +16,7 @@ struct PlantInfoView: View {
     @State private var showingAddOptions = false
     @State private var showAddDeviceView = false
     @State private var showDeletePlantView = false
+    @State private var showPlantDetailsView = false
     
     // State variables for tooltips
     @State private var selectedTemperatureReading: Reading?
@@ -71,6 +72,19 @@ struct PlantInfoView: View {
                             .frame(width: 20)
                         }
                         .padding(.horizontal)
+                        
+                        Text("Assigned Plant Type: \(viewModel.plant.plantType.scientificName)")
+                            //.fontWeight(.ultraLight)
+                            .font(.footnote)
+                        if let prediction = viewModel.prediction {
+                            Text(
+                                "Predicted Plant Type: \(prediction.label) Confidence: \(prediction.confidence)"
+                            )
+                            //.fontWeight(.ultraLight)
+                            .font(.footnote)
+                        } else {
+                            EmptyView()
+                        }
                         
                         // Temperature Chart with Tooltip
                         Text("Temperature")
@@ -295,6 +309,9 @@ struct PlantInfoView: View {
             }
         }
         .confirmationDialog("Add New", isPresented: $showingAddOptions, titleVisibility: .hidden) {
+            Button("View Plant Details") {
+                showPlantDetailsView = true
+            }
             Button("Add Device to Plant") {
                 showAddDeviceView = true
             }
@@ -302,6 +319,9 @@ struct PlantInfoView: View {
                 showDeletePlantView = true
             }
             Button("Cancel", role: .cancel) { }
+        }
+        .sheet(isPresented: $showPlantDetailsView) {
+            PlantDetailsView(plant: viewModel.plant)
         }
         .sheet(isPresented: $showAddDeviceView) {
             AddDeviceView { newDevice in
@@ -395,6 +415,39 @@ struct UVTooltipView: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM d, h:mm a"
         return formatter.string(from: date)
+    }
+}
+
+// Plant Details View
+struct PlantDetailsView: View {
+    private var plant: Plant
+    init(plant: Plant) {
+        self.plant = plant
+    }
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // Plant Basic Information
+                Group {
+                    Text("Plant Name: \(plant.plantName)")
+                    Text("Type: \(plant.plantType.scientificName)")
+                    Text("Common Name: \(plant.plantType.commonName)")
+                    Text("Family: \(plant.plantType.family)")
+                }
+                .font(.headline)
+
+                // Plant Details
+                Group {
+                    Text("Description: \(plant.plantType.description)")
+                    Text("Watering: \(plant.plantType.watering)")
+                    Text("Lighting: \(plant.plantType.lighting)")
+                    Text("Area: \(plant.area?.name ?? "No Area")")
+                    Text("Date Planted: \(plant.datePlanted ?? "Unknown")")
+                }
+                .font(.subheadline)
+            }
+            .padding()
+        }
     }
 }
 

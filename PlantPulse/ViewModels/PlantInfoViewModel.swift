@@ -12,6 +12,7 @@ class PlantInfoViewModel: ObservableObject {
     @EnvironmentObject var profile: Profile
     
     @Published var readings = [Reading]()
+    @Published var prediction: Prediction? = nil
     @Published var readingsLoadError: String? = ""
     @Published var plant: Plant
     @Published var areas: [Area] = []
@@ -46,6 +47,10 @@ extension PlantInfoViewModel {
             guard let data = try? JSONDecoder().decode(ReadingsResponse.self, from: data) else { throw APIError.noData }
             
             self.readings = data.readings
+            
+            if(data.prediction != nil) {
+                self.prediction = data.prediction
+            }
             
         } catch {
             readingsLoadError = error.localizedDescription

@@ -158,6 +158,12 @@ struct Reading: Identifiable, Hashable, Codable {
     }
 }
 
+struct Prediction: Codable {
+    let label: String
+    let confidence: Double
+}
+
 struct ReadingsResponse: Codable {
     let readings: [Reading]
+    let prediction: Prediction?
 }
