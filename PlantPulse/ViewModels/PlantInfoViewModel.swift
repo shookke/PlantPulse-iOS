@@ -44,7 +44,8 @@ extension PlantInfoViewModel {
             
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw APIError.serverError }
             
-            guard let data = try? JSONDecoder().decode(ReadingsResponse.self, from: data) else { throw APIError.noData }
+            let decoder = JSONDecoder()
+            guard let data = try? decoder.decode(ReadingsResponse.self, from: data) else { throw APIError.noData }
             
             self.readings = data.readings
             
@@ -68,8 +69,9 @@ extension PlantInfoViewModel {
             let (data, response) = try await URLSession.shared.data(for: request)
             
             guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw APIError.serverError }
-
-            guard let data = try? JSONDecoder().decode(AreasResponse.self, from: data) else { throw APIError.noData }
+            
+            let decoder = JSONDecoder()
+            guard let data = try? decoder.decode(AreasResponse.self, from: data) else { throw APIError.noData }
             
             self.areas = data.areas
             

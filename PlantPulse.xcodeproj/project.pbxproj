@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		780029482CEFA8D000F486F5 /* ToDoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780029472CEFA8C800F486F5 /* ToDoTask.swift */; };
+		7800294A2CEFAC4C00F486F5 /* TaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 780029492CEFAC4500F486F5 /* TaskDetailView.swift */; };
+		7800294C2CEFACA200F486F5 /* AnimatedIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7800294B2CEFAC9D00F486F5 /* AnimatedIcon.swift */; };
+		7800294E2CEFACC800F486F5 /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7800294D2CEFACC300F486F5 /* TasksViewModel.swift */; };
 		78531BE22C9E014200404054 /* PlantIDViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78531BE12C9E014200404054 /* PlantIDViewModel.swift */; };
 		787634DA2C8FA8E900377091 /* DeviceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634D92C8FA8E900377091 /* DeviceInfoView.swift */; };
 		787634DC2C8FD9CF00377091 /* WiFiSetupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787634DB2C8FD9CF00377091 /* WiFiSetupViewModel.swift */; };
@@ -96,6 +100,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		780029472CEFA8C800F486F5 /* ToDoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoTask.swift; sourceTree = "<group>"; };
+		780029492CEFAC4500F486F5 /* TaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailView.swift; sourceTree = "<group>"; };
+		7800294B2CEFAC9D00F486F5 /* AnimatedIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedIcon.swift; sourceTree = "<group>"; };
+		7800294D2CEFACC300F486F5 /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
 		783452F82C84F3C600E0FC95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		78531BE12C9E014200404054 /* PlantIDViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlantIDViewModel.swift; sourceTree = "<group>"; };
 		787634D92C8FA8E900377091 /* DeviceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoView.swift; sourceTree = "<group>"; };
@@ -264,6 +272,7 @@
 		7893847B2C751CDA00A54C68 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				780029472CEFA8C800F486F5 /* ToDoTask.swift */,
 				78A3A9882CD046A600E2A3B5 /* AddArea.swift */,
 				78A3A9782CCFF3FD00E2A3B5 /* AreasResponse.swift */,
 				78A3A96E2CCED33900E2A3B5 /* WeatherResponse.swift */,
@@ -279,6 +288,7 @@
 		7893847C2C751CE500A54C68 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				780029492CEFAC4500F486F5 /* TaskDetailView.swift */,
 				78A3A9BC2CD4F7BC00E2A3B5 /* RemoveDeviceView.swift */,
 				78A3A9B82CD4071600E2A3B5 /* AddDeviceView.swift */,
 				78A3A99D2CD2A47500E2A3B5 /* DeviceRegistration */,
@@ -306,6 +316,7 @@
 		7893847D2C751CF000A54C68 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				7800294D2CEFACC300F486F5 /* TasksViewModel.swift */,
 				78A3A9BE2CD4F9AD00E2A3B5 /* DeviceInfoViewModel.swift */,
 				78A3A96A2CCED1EC00E2A3B5 /* WeatherMangaer.swift */,
 				78A3A9B62CD3DE6600E2A3B5 /* AreaAddPlantViewModel.swift */,
@@ -360,6 +371,7 @@
 		78A3A9AA2CD2A47E00E2A3B5 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				7800294B2CEFAC9D00F486F5 /* AnimatedIcon.swift */,
 				78A3A9A32CD2A47E00E2A3B5 /* AreaSectionView.swift */,
 				78A3A9A42CD2A47E00E2A3B5 /* CondensedWeatherView.swift */,
 				78A3A9A52CD2A47E00E2A3B5 /* HorizontalPlantScrollView.swift */,
@@ -557,12 +569,15 @@
 				78A3A9C42CD5509200E2A3B5 /* Secrets.swift in Sources */,
 				78A3A9792CCFF40300E2A3B5 /* AreasResponse.swift in Sources */,
 				78A3A9692CCEC97900E2A3B5 /* NewPlantView.swift in Sources */,
+				7800294A2CEFAC4C00F486F5 /* TaskDetailView.swift in Sources */,
 				78E698542C97340D0086FD68 /* ScheduleView.swift in Sources */,
 				78A3A9892CD046AB00E2A3B5 /* AddArea.swift in Sources */,
 				787E7EC32C780ACC006FCAE1 /* Profile.swift in Sources */,
 				7893848B2C756F6000A54C68 /* RegisterView.swift in Sources */,
 				789384852C75215B00A54C68 /* APIHelper.swift in Sources */,
 				787E7ED12C7A8E3B006FCAE1 /* HomeViewModel.swift in Sources */,
+				7800294E2CEFACC800F486F5 /* TasksViewModel.swift in Sources */,
+				7800294C2CEFACA200F486F5 /* AnimatedIcon.swift in Sources */,
 				7893848D2C75721000A54C68 /* MainView.swift in Sources */,
 				78A3A9852CD041E700E2A3B5 /* AddAreaView.swift in Sources */,
 				78A3A95B2CCBF09300E2A3B5 /* PlantInfoViewModel.swift in Sources */,
@@ -570,6 +585,7 @@
 				78FB8A9E2C83A98300F67193 /* DevicesViewModel.swift in Sources */,
 				787E7ECD2C7A5358006FCAE1 /* ProfileView.swift in Sources */,
 				78A3A9772CCFF07400E2A3B5 /* AreaView.swift in Sources */,
+				780029482CEFA8D000F486F5 /* ToDoTask.swift in Sources */,
 				78A3A9912CD14D3C00E2A3B5 /* AddAreaViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
