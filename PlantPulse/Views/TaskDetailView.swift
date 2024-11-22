@@ -17,9 +17,11 @@ struct TaskDetailView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text(todo.plant.plantName)
-                    .font(.title)
-                    .padding()
+                NavigationLink(destination: PlantInfoView(plant: todo.plant, areas: []), label: {
+                    Text(todo.plant.plantName)
+                        .font(.title)
+                        .padding()
+                })
                 Spacer()
                 AnimatedIcon(metric: todo.metric)
                     .frame(maxWidth: 50, maxHeight: 50)

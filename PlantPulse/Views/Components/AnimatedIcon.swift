@@ -15,13 +15,23 @@ struct AnimatedIcon: View {
         Group {
             switch metric {
                 case "temperature":
+                if #available(iOS 17.0, *) {
                     Image(systemName: "thermometer")
-                        .foregroundColor(.red)
-                        .rotationEffect(Angle(degrees: animate ? 10 : -10))
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.red, .tertiary)
+                        .symbolEffect(.bounce.up.byLayer, options: .nonRepeating)
+                        .onAppear {
+                            animate = true
+                        }
+                } else {
+                    Image(systemName: "thermometer")
+                        .symbolRenderingMode(.palette)
+                        .foregroundStyle(.red, .tertiary)
                         .animation(Animation.easeInOut(duration: 1), value: animate)
                         .onAppear {
                             animate = true
                         }
+                }
                 case "humidity":
                     Image(systemName: "humidity.fill")
                         .foregroundColor(.blue)
@@ -86,3 +96,8 @@ struct AnimatedIcon: View {
         }
     }
 }
+
+#Preview {
+    AnimatedIcon(metric: "temperature")
+}
+
